@@ -24,7 +24,7 @@ function renderPhoto(item) {
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class="mapImage"><img src='"  + src + "' /></div>")
+			htmlContent: ("<div class="+"mapImage"+"><img src='"  + src + "' /></div>")
 		}
 	);
 	map.entities.push(pushpin);
