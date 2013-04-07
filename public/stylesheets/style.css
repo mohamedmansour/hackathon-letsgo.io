@@ -498,7 +498,10 @@ h1#headerBar {
 }
 
 #theApp.obscured {
-	-webkit-filter: brightness(.4);
+	-webkit-filter: brightness(0.4);
+	-moz-filter: brightness(0.4);
+	-o-filter: brightness(0.4);
+	filter: brightness(0.4)
 }
 
 
@@ -575,11 +578,11 @@ h1#headerBar {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	-webkit-transition: all 3s ease; /*filter is set for webkit only*/
-	/*-moz-transition: top 3s ease;
+	-webkit-transition: all 3s ease;
+	-moz-transition: top 3s ease;
 	-ms-transition: top 3s ease;
 	-o-transition: top 3s ease;
-	transition: top 3s ease;*/
+	transition: top 3s ease;
 }
 
 header {
