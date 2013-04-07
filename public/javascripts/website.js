@@ -12,9 +12,21 @@ function smallPicture() {
     isOpened = false;
 }
 
-function hugePicture() {
-
-}
+// function hugePicture() {
+//     if(alreadyBig = True){
+//         $("header").removeClass("active");
+//         $("#mapFrame").addClass("imageFullScreen");
+//         $("#bigPicture").addClass("imageFullScreen");
+//         alreadyBig = true;
+//     }
+//     else {
+//         $("header").addClass("active");
+//         $("#mapFrame").removeClass("imageFullScreen");
+//         $("#bigPicture").removeClass("imageFullScreen");
+//         alreadyBig = false;
+//     }
+    
+// }
 
 
 
