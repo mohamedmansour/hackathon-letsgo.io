@@ -2,7 +2,7 @@
 
 
     <div id="welcomeScreen">
-      <img id="introLogo" src="/img/LetsGoLogo.svg" />
+      <img id="introLogo" class="hidden" src="/img/LetsGoLogo.svg" />
       <div id="bigSearchBar">
         <h1 id="headerBar">Where would you like to go?</h1>
         <div id="searchWrapper">
@@ -16,8 +16,8 @@
 
     <div id="theApp" class="obscured">
       <header>
-        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
-        </input>
+        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?"></input>
+        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?"></input>
         <a class="button">Go!</a>
         <div class="headerMenu">
           <% if (!user) { %>
