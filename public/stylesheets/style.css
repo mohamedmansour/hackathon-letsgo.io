@@ -707,3 +707,28 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 
 
 
+
+@media (max-width: 800px) {
+	input#searchToHeader, input#searchFromHeader {
+		width: 15em;
+	}
+	header {
+		height: auto;
+	} 
+	#searchWrapper .button {
+		display:block;
+	}
+}
+
+
+@media (max-width: 480px) {
+	#introLogo {
+		height: 100px;
+	}
+	#bigSearchBar {
+		top: 25%;
+	}
+	h1#headerBar {
+		font-size:4em;
+	}
+}
