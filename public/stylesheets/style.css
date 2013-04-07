@@ -603,6 +603,7 @@ h1#headerBar {
 
 header {
 	top: -5.1em;
+	overflow: hidden;
 	height: 5em;
 	padding-top: .05em;
 	background-color: #333;
@@ -712,7 +713,7 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 	input#searchToHeader, input#searchFromHeader {
 		width: 15em;
 	}
-	header {
+	header.active {
 		height: auto;
 	} 
 	#searchWrapper .button {
