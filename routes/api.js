@@ -20,6 +20,7 @@ exports.attach = function(app) {
 					if (body.statusCode === 200 && body.resourceSets.length) {
 						var coord = body.resourceSets[0].resources[0].point.coordinates;
 						latlongs.push({
+							query: data,
 							latitude: coord[0],
 							longitude: coord[1]
 						});
@@ -30,7 +31,7 @@ exports.attach = function(app) {
 
 					if (--queryLength === 0) {
 						resp.send({
-							coordinate: latlongs
+							coordinates: latlongs
 						});
 					}
 				});
@@ -43,6 +44,7 @@ exports.attach = function(app) {
 					var coord = body.resourceSets[0].resources[0].point.coordinates;
 					resp.send({
 						coordinates: {
+							query: query,
 							latitude: coord[0],
 							longitude: coord[1]
 						}
