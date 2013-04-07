@@ -7,7 +7,7 @@ function parsePhotoSearch(response, callback) {
 		getBestPlacesToVisit(response.photos.photo, callback);
 	}
 	else callback([]);
-	
+
 }
 
 function getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, callback) {

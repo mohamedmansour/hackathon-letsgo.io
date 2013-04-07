@@ -40,11 +40,26 @@ function appActivate() {
 }
 
 
-$('#lookup').click(function(e){
+$('#lookup, #lookupHeader').click(function(e){
 	e.preventDefault();
 
-	var to = $('#searchTo').val(),
-		from = $('#searchFrom').val();
+	if ($("header").hasClass("active")) {
+		var to = $('#searchToHeader').val(),
+			from = $('#searchFromHeader').val();
+	} else {
+		var to = $('#searchTo').val(),
+			from = $('#searchFrom').val();
+
+		$('#searchFromHeader').val(from);
+		$('#searchToHeader').val(to);
+	}
+
+    if(isOpened){
+	    $("#bigPicture").removeClass("active");
+	    $("#mapFrame").removeClass("sidebar");
+    }
+
+    map.entities.clear(); 
 
 	if (to.length && from.length){
 

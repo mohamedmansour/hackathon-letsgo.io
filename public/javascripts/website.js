@@ -1,7 +1,10 @@
+var isOpened = false;
+
 function fullPicture(image) {
     console.log(image);
     $("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
     $("#mapFrame").addClass("sidebar");
+    isOpened = true;
 }
 
 function logoSize() {
@@ -9,7 +12,7 @@ function logoSize() {
     $("#introLogo").css({height: (offsert.top/3)*2, paddingTop: offsert.top/6});
     if($("#introLogo").hasClass("hidden")) {
         $("#introLogo").removeClass("hidden");
-    };
+    }
 }
 
 $(document).ready(function() {
