@@ -17,12 +17,18 @@ map.entities.clear();
 // 	latDiff =  bounds.height/2,
 // 	lonDiff =  bounds.width/2;
 
-var pushpinOptions = {
-	width: null,
-	height: null,
-	htmlContent: "<div style='font-size:12px;font-weight:bold;border:solid 2px;background-color:LightBlue;width:100px;'>Custom Pushpin</div>"
-}; 
-
+function renderPhoto(item) {
+	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg"
+	var pushpin = new Microsoft.Maps.Pushpin(
+		new Microsoft.Maps.Location(item.latitude, item.longitude),
+		 {
+			width: null,
+			height: null,
+			htmlContent: ("<div style='font-size:12px;font-weight:bold;border:solid 2px;background-color:LightBlue;width:100px;'><img src='"  + src + "' /></div>")
+		}
+	);
+	map.entities.push(pushpin);
+}
 // for (var i = 0; i < limit; i++) {
 // 	var pushpin = new Microsoft.Maps.Pushpin(
 //		new Microsoft.Maps.Location(
@@ -58,7 +64,9 @@ $('#lookup').click(function(e){
 		  	map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
 			
 			getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
-				console.log(pix);
+				pix.forEach(function(pic) {
+					renderPhoto(pic);
+				});
 			});
 
 		});
