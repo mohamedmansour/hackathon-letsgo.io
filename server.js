@@ -26,6 +26,7 @@ app.configure(function(){
 
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+
 });
 
 app.configure('development', function(){
@@ -45,6 +46,7 @@ app.set('mapsKey', conf.get("BING_MAPS_API"));
 
 app.get('/', routes.index);
 app.get('/home', routes.home);
+app.get('/closet', routes.closet);
 app.get('/users', user.list);
 
 auth.attach(app);

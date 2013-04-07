@@ -26,3 +26,7 @@ exports.privacy = function(req, res){
 exports.home = function(req, res){
   res.render('home', {user: req.user });
 };
+
+exports.closet = function(req, res) {
+  res.render('closet', {user: req.user });
+};

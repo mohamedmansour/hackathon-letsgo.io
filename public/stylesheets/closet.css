@@ -1,0 +1,50 @@
+#mainSection {
+	margin-top:80px;
+}
+
+#person {
+	background-color: #eee;
+	width: 200px;
+}
+
+#head {
+	border-radius: 70px;
+	width: 70px;
+	height:70px;
+	background-color: white;
+	margin: 0 auto;
+}
+
+#upperbody {
+
+	width: 150px;
+	height: 100px;
+	margin: 0 auto;
+	background-color: red;
+}
+
+
+#lowerbody {
+	width: 120px;
+	height: 150px;
+	margin: 0 auto;
+	background-color: yellow;
+	position: relative;
+}
+
+#dropSection {
+	padding:20px;
+	border: 3px solid #ccc;
+}
+.clothes {
+	max-width: 100%;
+max-height: 100%;
+margin: 0 auto;
+display: block;
+}
+
+.clothesDrop {
+
+	max-width: 200px;
+max-height: 200px;
+}

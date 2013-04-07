@@ -1,0 +1,39 @@
+<% include header %>
+    <div id="theApp">
+      <header>
+        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
+        </input>
+        <a class="round button">Go!</a>
+        <div class="headerMenu">
+          <% if (!user) { %>
+            <h2>Welcome! Please log in. <a href="/auth">Facebook</a></h2>
+          <% } else { %>
+            <a href="/auth/logout" class="button accountButton loggedIn">
+              <img src="http://avatars.io/facebook/<%=user.username%>?size=small" width="26" height="26">
+              <%= user.displayName %>
+            </a>
+          <% } %>
+        </div>
+      </header>
+
+      <section id="mainSection">
+        <button id="uploadphotoBtn">Upload clothes</button>
+        <div id="person">
+          <div id="head" class="drop">
+          </div>
+          <div id="upperbody" class="drop">
+          </div>
+          <div id="lowerbody" class="drop">
+          </div>
+          <div id="feet" class="drop">
+          </div>
+        </div>
+      </section>
+      <section id="dropSection">
+      </section>
+    </div> <!-- //END theApp -->
+
+<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+<script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
+<script src="/javascripts/closest.js"></script>
+<% include footer %>
