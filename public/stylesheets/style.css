@@ -409,8 +409,17 @@ body {
   padding: 0px;
   font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background: url(/img/navy_blue.png);
 }
 
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+	body{
+		background: url(/img/navy_blue_@2x.png);
+		background-size: 600px 385px;
+	}
+}
 
 #welcomeScreen{
 	position: absolute;
@@ -516,24 +525,27 @@ h1#headerBar {
 
 #bigPicture {
 	position: absolute;
-	top: 0;
+	top: 4.9em;
 	right: 0;
 	bottom: 0;
 	left: 0%;
 	z-index: 9;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	-o-background-size: contain;
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color: #efefef;
 }
 
 #bigPicture.active {
-	left: 75% !important;
-	-webkit-transition: left 0.3s ease;
-	-moz-transition: left 0.3s ease;
-	-ms-transition: left 0.3s ease;
-	-o-transition: left 0.3s ease;
-	transition: left 0.3s ease;
+	right: 25% !important;
+	-webkit-transition: right 0.3s ease;
+	-moz-transition: right 0.3s ease;
+	-ms-transition: right 0.3s ease;
+	-o-transition: right 0.3s ease;
+	transition: right 0.3s ease;
 }
 
 

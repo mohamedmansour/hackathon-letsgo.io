@@ -1,6 +1,6 @@
 function fullPicture(image) {
     console.log(image);
-    $("#bigPicture").css({'background-size':'url('+image+')'}).addClass("active");
+    $("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
     $("#mapFrame").addClass("sidebar");
 }
 
