@@ -6,6 +6,52 @@ exports.attach = function(app) {
 	app.get('/api/locationsearch', function(req, resp) {
 		var query = req.query.q;
 		console.log("locating", query);
-		request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + query + "&key=" + conf.get("BING_MAPS_API")).pipe(resp);
+		
+
+		if (query instanceof Array) {
+			var latlongs = [];
+
+			var queryLength = query.length;
+
+			query.forEach(function(data) {
+				request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + data + "&key=" + conf.get("BING_MAPS_API"), function(err, res, body) {
+					console.log(queryLength);
+					body = JSON.parse(body);
+					if (body.statusCode === 200 && body.resourceSets.length) {
+						var coord = body.resourceSets[0].resources[0].point.coordinates;
+						latlongs.push({
+							latitude: coord[0],
+							longitude: coord[1]
+						});
+					}
+					else {
+						resp.send({error: "Cannot get data"});
+					}
+
+					if (--queryLength === 0) {
+						resp.send({
+							coordinate: latlongs
+						});
+					}
+				});
+			});
+		}
+		else {
+			request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + query + "&key=" + conf.get("BING_MAPS_API"), function(err, res, body) {
+				body = JSON.parse(body);
+				if (body.statusCode === 200 && body.resourceSets.length) {
+					var coord = body.resourceSets[0].resources[0].point.coordinates;
+					resp.send({
+						coordinates: {
+							latitude: coord[0],
+							longitude: coord[1]
+						}
+					});
+				}
+				else {
+					resp.send({error: "Cannot get data"});
+				}
+			});
+		}
 	});
 };
