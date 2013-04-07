@@ -1,4 +1,4 @@
-app = require("../server.js").app
+var app = require("../server.js").app
 	, conf = app.get("conf");
 /*
  * GET home page.

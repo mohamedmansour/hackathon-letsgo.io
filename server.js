@@ -39,14 +39,15 @@ nconf.env().file({ file: app.get("configFile") });
 
 var routes = require('./routes')
   , user = require('./routes/user')
-  , auth = require('./routes/auth');
+  , auth = require('./routes/auth')
+  , api = require('./routes/api');;
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/');
 }
 
-app.set('mapsKey', conf.get("BING_MAPS_API"));
+app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
 app.get('/', routes.index);
 app.get('/home', ensureAuthenticated, routes.home);
@@ -54,6 +55,7 @@ app.get('/closet', routes.closet);
 app.get('/users', user.list);
 
 auth.attach(app);
+api.attach(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
