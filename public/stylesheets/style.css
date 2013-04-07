@@ -411,6 +411,41 @@ body {
 }
 
 
+#welcomeScreen{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0%;
+	z-index: 30;
+}
+
+#bigSearchBar {
+	position: absolute;
+	top: 30%;
+	right: 0;
+	left: 0%;
+	z-index: 10;
+	height: 265px;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+h1#headerBar {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	text-align: center;
+	letter-spacing: -0.04em;
+	font-size: 5em;
+	line-height: 2em;
+}
+
+#theApp.obscured {
+	-webkit-filter: brightness(.4);
+}
+
+
+
 #mapFrame {
 /*	background: url("http://placekitten.com/900/900");
 	background-size: cover;*/

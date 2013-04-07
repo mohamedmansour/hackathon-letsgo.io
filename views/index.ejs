@@ -1,7 +1,16 @@
 <% include header %>
 
-    <div id="theApp">
-      <header class="active">
+
+    <div id="welcomeScreen">
+      <div id="bigSearchBar">
+        <h1 id="headerBar">Where would you like to go?</h1>
+        <input type="text" class="location" autocomplete="off" id="bigSearchInput" name="location" placeholder="Explore!">
+        </input>
+      </div>
+    </div>
+
+    <div id="theApp" class="obscured">
+      <header>
         <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
         </input>
         <a class="button">Go!</a>
@@ -14,8 +23,8 @@
         </div>
 
       </header> <!-- //END Header -->
-      <div id="bigPicture" class="active"></div>
-  		<div id="mapFrame" class="sidebar"></div>
+      <div id="bigPicture"></div>
+  		<div id="mapFrame"></div>
     </div> <!-- //END theApp -->
 
 <% include footer %>

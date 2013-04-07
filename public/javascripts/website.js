@@ -2,4 +2,7 @@ function appActivate() {
     $("header").addClass("active");
 }
 
-// function 
+function fullPicture(image) {
+    $("#bigPicture").addClass("active");
+    $("#mapFrame").addClass("sidebar");
+}
