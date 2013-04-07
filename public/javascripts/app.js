@@ -9,6 +9,8 @@ map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
 
 map.entities.clear();
 
+var canvasPhotos = {};
+
 // var limit = 5,
 // 	bounds = map.getBounds(),
 // 	latlon = bounds.getNorthwest(),
@@ -18,27 +20,18 @@ map.entities.clear();
 // 	lonDiff =  bounds.width/2;
 
 function renderPhoto(item) {
+	canvasPhotos[item.id] = item;
 	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg"
 	var pushpin = new Microsoft.Maps.Pushpin(
 		new Microsoft.Maps.Location(item.latitude, item.longitude),
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class='mapImage'><img src='"  + src + "' /></div>")
+			htmlContent: ("<div class='mapImage' data-id='" + item.id + "'><img src='"  + src + "' /></div>")
 		}
 	);
 	map.entities.push(pushpin);
 }
-// for (var i = 0; i < limit; i++) {
-// 	var pushpin = new Microsoft.Maps.Pushpin(
-//		new Microsoft.Maps.Location(
-// 		lat - (latDiff * Math.random()),
-// 		lon + (lonDiff * Math.random())),
-//		pushpinOptions
-// 	);
-// 	map.entities.push(pushpin);
-// }
-
 
 function appActivate() {
     $("header").addClass("active");
@@ -64,6 +57,7 @@ $('#lookup').click(function(e){
 		  	map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
 			
 			getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
+				canvasPhotos = {};
 				pix.forEach(function(pic) {
 					renderPhoto(pic);
 				});
