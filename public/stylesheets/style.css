@@ -408,6 +408,7 @@ table {
 body {
   padding: 0px;
   font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 
