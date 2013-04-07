@@ -8,6 +8,7 @@ var map = new Microsoft.Maps.Map(document.getElementById('mapFrame'), {
 map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
 
 map.entities.clear();
+Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 
 var canvasPhotos = {};
 
@@ -92,7 +93,7 @@ function fetchLocationAndLaunchQuery(){
 			
 			//getPhotos();
 			
-			Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
+			
 			//setTimeout(function() { getPhotos(); }, 2000);
 		});
 	}
