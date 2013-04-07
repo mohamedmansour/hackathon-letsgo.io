@@ -6,7 +6,6 @@ exports.attach = function(app) {
 	app.get('/api/locationsearch', function(req, resp) {
 		var query = req.query.q;
 		console.log("locating", query);
-		
 
 		if (query instanceof Array) {
 			var latlongs = [];
@@ -14,7 +13,7 @@ exports.attach = function(app) {
 			var queryLength = query.length;
 
 			query.forEach(function(data) {
-				request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + data + "&key=" + conf.get("BING_MAPS_API"), function(err, res, body) {
+				request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + encodeURIComponent(data) + "&key=" + conf.get("BING_MAPS_API"), function(err, res, body) {
 					console.log(queryLength);
 					body = JSON.parse(body);
 					if (body.statusCode === 200 && body.resourceSets.length) {
