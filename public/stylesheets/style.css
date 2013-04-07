@@ -420,13 +420,20 @@ body {
 	z-index: 30;
 }
 
+#introLogo {
+	margin: 0 auto;
+	display: block;
+	padding-top: 9em;
+}
+
 #bigSearchBar {
 	position: absolute;
-	top: 30%;
+	top: 40%;
 	right: 0;
 	left: 0%;
 	z-index: 31;
-	height: 19em;
+	/*height: 19em;*/
+	padding-bottom: 4em;
 	background-color: rgba(0, 0, 0, 0.7);
 }
 
