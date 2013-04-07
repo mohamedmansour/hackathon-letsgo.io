@@ -21,13 +21,13 @@ var canvasPhotos = {};
 
 function renderPhoto(item) {
 	canvasPhotos[item.id] = item;
-	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg"
+	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg"
 	var pushpin = new Microsoft.Maps.Pushpin(
 		new Microsoft.Maps.Location(item.latitude, item.longitude),
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class='mapImage' data-id='" + item.id + "'><img src='"  + src + "' /></div>")
+			htmlContent: ("<div class='mapImage' data-id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
 		}
 	);
 	map.entities.push(pushpin);
@@ -56,7 +56,18 @@ $('#lookup').click(function(e){
 
 		  	map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
 			
-			getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
+			// map.getBounds(); 
+			var bounds = map.getBounds();
+			console.log(bounds);
+			var halfWidth = bounds.width / 2;
+			var halfHeight = bounds.height / 2;
+			var minimumLongitude = bounds.center.longitude - halfWidth,
+			    minimumLatitude = bounds.center.latitude - halfHeight,
+			    maximumLongitude = bounds.center.longitude + halfWidth,
+			    maximumLatitude = bounds.center.latitude + halfHeight;
+
+			//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
+			getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
 				canvasPhotos = {};
 				pix.forEach(function(pic) {
 					renderPhoto(pic);

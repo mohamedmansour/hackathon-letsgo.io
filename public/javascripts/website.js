@@ -23,6 +23,6 @@ $(window).resize(function() {
 
 $(document).on("click", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
-	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg";
-	fullPicture(src);
+	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
+	fullPicture(item.url_l);
 });
