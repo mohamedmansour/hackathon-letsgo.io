@@ -3,14 +3,15 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
+  , app = exports.app = express()
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , nconf = require('nconf');
 
-var app = express();
+nconf.env().file({ file: "config.json"});
 
 app.configure(function(){
+  app.set('conf', nconf);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
@@ -26,8 +27,14 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+
+var routes = require('./routes')
+  , user = require('./routes/user')
+  , auth = require('./routes/auth');
+  
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/auth', auth.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

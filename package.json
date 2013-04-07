@@ -7,7 +7,10 @@
   },
   "main": "./server.js",
   "dependencies": {
-    "express": "3.0.6",
-    "ejs": "*"
+    "express": "3.1.x",
+    "ejs": "0.8.x",
+    "nconf": "0.6.x",
+    "msnodesql": "0.2.x",
+    "passport-facebook": "0.1.x"
   }
 }
