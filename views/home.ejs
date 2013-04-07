@@ -1,8 +1,4 @@
 <% include header %>
-	  <div id="mapFrame">
-      <h1>foo</h1>
-    </div>
-
     <div id="theApp">
       <header>
         <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
@@ -14,10 +10,9 @@
         <% } else { %>
           <h2>Hello, <%= user.displayName %>.</h2>
         <% } %>
-
       </header>
-      <!-- <div id="map_canvas"></div> 
-      <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
+
+      <div id="mapFrame"></div>
     </div> <!-- //END theApp -->
 
 <% include footer %>
