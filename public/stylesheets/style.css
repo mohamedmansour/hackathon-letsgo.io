@@ -561,7 +561,7 @@ header.active {
 	top: -.1em !important;
 }
 
-input#location { /*This is the button ID*/
+input#searchToHeader, input#searchFromHeader { /*This is the button ID*/
 	height: 3.5em;
 	width: 20em;
 	margin: .6em;
@@ -570,19 +570,19 @@ input#location { /*This is the button ID*/
 }
 
 
-input#location::-webkit-input-placeholder { /* WebKit browsers */
+input#searchToHeader::-webkit-input-placeholder, input#searchFromHeader::-webkit-input-placeholder { /* WebKit browsers */
     color: #999;
     text-align: left;
 }
-input#location:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+input#searchToHeader:-moz-placeholder, input#searchFromHeader:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #999;
     text-align: left;
 }
-input#location::-moz-placeholder { /* Mozilla Firefox 19+ */
+input#searchToHeader::-moz-placeholder, input#searchFromHeader::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: #999;
     text-align: left;
 }
-input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
+input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #999;
     text-align: left;
 }
