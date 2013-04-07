@@ -56,6 +56,13 @@ $(document).on("click", ".mapImage", function() {
 	fullPicture(item.url_l);
 });
 
+$(document).on("touchstart", ".mapImage", function() {
+	var item = canvasPhotos[$(this).attr("data-id")];
+	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
+	fullPicture(item.url_l);
+});
+
+
 $(document).on("keyup", function(e) {
 	if (e.keyCode === 27) smallPicture();
 });
