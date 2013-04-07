@@ -459,8 +459,8 @@ h1#headerBar {
 	display: inline-block;
 	margin: 0 auto;
 	padding: 0.1em 1em;
-	width: 340px;
-	height: 70px;
+	width: 12em;
+	height: 2.5em;
 	font-size: 2em;
 }
 
