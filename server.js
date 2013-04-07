@@ -41,11 +41,15 @@ var routes = require('./routes')
   , user = require('./routes/user')
   , auth = require('./routes/auth');
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}
 
 app.set('mapsKey', conf.get("BING_MAPS_API"));
 
 app.get('/', routes.index);
-app.get('/home', routes.home);
+app.get('/home', ensureAuthenticated, routes.home);
 app.get('/closet', routes.closet);
 app.get('/users', user.list);
 

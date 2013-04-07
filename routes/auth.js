@@ -47,7 +47,6 @@ exports.attach = function(app){
 	});
 }
 
-
 function findOrCreateUser (profile){
 	var query = azure.TableQuery
       .select()

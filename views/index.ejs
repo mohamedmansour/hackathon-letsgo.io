@@ -22,7 +22,13 @@
           <% if (!user) { %>
             <a href="/auth" class="button accountButton">Log In</a>
           <% } else { %>
-            <a href="/auth" class="button accountButton"><%= user.displayName %>.</a>
+            <span class="button accountButton loggedIn">
+              <img src="http://avatars.io/facebook/<%=user.username%>?size=small" width="26" height="26">
+              <%= user.displayName %>
+            </span>
+            <a href="/auth/logout/" class="button logoutButton">
+              Logout
+            </a>
           <% } %>
         </div>
 
