@@ -4,7 +4,7 @@ function parsePhotoSearch(response, callback) {
 	"use strict";
 
 	if (response && response.photos && response.photos.photo) {
-		getBestPlacesToVisit(response.photos.photo, callback);
+		getBestPlacesToVisit(response.photos.photo.filter(function(photo){return photo.owner !== "33684889@N06";}), callback);
 	}
 	else callback([]);
 
