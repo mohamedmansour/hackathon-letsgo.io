@@ -1,9 +1,16 @@
-<% include header %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Looking for a scenic route or a great new place to visit? Check out LetsGo, a travel discovery tool that creates the best routes for you on a photo map.">
+    <meta name="viewport" content="width=device-width">
+    <title>LetsGo - Discover Scenic Highways and Byways</title>
+    <link rel="stylesheet" href="/stylesheets/closet.css" />
+  </head>
+  <body>
     <div id="theApp">
       <header>
-        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
-        </input>
-        <a class="round button">Go!</a>
         <div class="headerMenu">
           <% if (!user) { %>
             <h2>Welcome! Please log in. <a href="/auth">Facebook</a></h2>
@@ -17,7 +24,6 @@
       </header>
 
       <section id="mainSection">
-        <button id="uploadphotoBtn">Upload clothes</button>
         <div id="person">
           <div id="head" class="drop">
           </div>
@@ -29,11 +35,19 @@
           </div>
         </div>
       </section>
+
       <section id="dropSection">
       </section>
+      
+      <footer>
+        <button id="uploadphotoBtn">Upload clothes</button>
+      </footer>
     </div> <!-- //END theApp -->
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
 <script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
-<script src="/javascripts/closest.js"></script>
-<% include footer %>
+<script src="/javascripts/closest.js" ></script>
+
+  </body>
+</html>

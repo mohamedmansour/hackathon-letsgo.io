@@ -66,10 +66,9 @@
 
 
 	var API_KEY = "76edb1c61510990137c63d21d0dec6492e0c196a";
-	var sessionID = "1_MX4xMzMzMjM3MX4xMjcuMC4wLjF-U3VuIEFwciAwNyAwMjoxODo1OCBQRFQgMjAxM34wLjAxODUzNTQzNX4"; // Replace with your own session ID.
+	var sessionID = "1_MX4yNTQ4MjgxMn4xMjcuMC4wLjF-U3VuIEFwciAwNyAxMDoyMjoyNSBQRFQgMjAxM34wLjExMTA4NTgzfg"; // Replace with your own session ID.
 	                 // See https://dashboard.tokbox.com/projects
-	var token = "T1==cGFydG5lcl9pZD0xMzMzMjM3MSZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz1lNTVjMjUxNDU5ZjU1Y2M4YjNiYWMxM2FhODA2YzU1ZDYxNzdiZGQ0OnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDR4TXpNek1qTTNNWDR4TWpjdU1DNHdMakYtVTNWdUlFRndjaUF3TnlBd01qb3hPRG8xT0NCUVJGUWdNakF4TTM0d0xqQXhPRFV6TlRRek5YNCZjcmVhdGVfdGltZT0xMzY1MzI2NDEzJm5vbmNlPTAuNzgxMjgxNDc2NDQzNzI0OCZleHBpcmVfdGltZT0xMzY1NDEyODEzJmNvbm5lY3Rpb25fZGF0YT0="; // Replace with a generated token that has been assigned the moderator role.
-	             // See https://dashboard.tokbox.com/projects
+	var token = "T1==cGFydG5lcl9pZD0yNTQ4MjgxMiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz0yMjhjODY2ZGZiZTBjMTFmOGFmOWIyMDhkMTBkN2EzMmIyZDQ5OWIzOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9MV9NWDR5TlRRNE1qZ3hNbjR4TWpjdU1DNHdMakYtVTNWdUlFRndjaUF3TnlBeE1Eb3lNam95TlNCUVJGUWdNakF4TTM0d0xqRXhNVEE0TlRnemZnJmNyZWF0ZV90aW1lPTEzNjUzNTUzNTgmbm9uY2U9MC40NTkwMjEzNzAyMjg1NzYxNCZleHBpcmVfdGltZT0xMzY3OTQ3MzU3JmNvbm5lY3Rpb25fZGF0YT0=";
 
 	var session = TB.initSession(sessionID);
 	session.addEventListener("sessionConnected", sessionConnectHandler);
@@ -83,7 +82,7 @@
 		 // This example assumes that a publisherContainer div exists
 		publisherContainer.appendChild(div);
 
-		var publisherProperties = {width: 70, height:70, name:"Bob's stream"};
+		var publisherProperties = {width: '100%', height:'100%'};
 		var publisher = TB.initPublisher(API_KEY, 'publisher', publisherProperties);
 		session.publish(publisher);
 	}
