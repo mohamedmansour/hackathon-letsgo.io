@@ -32,7 +32,7 @@ function renderPhoto(item) {
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class='mapImage' data-id='" + item.id + " id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
+			htmlContent: ("<div class='mapImage' data-id='" + item.id + "'' id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
 		}
 	);
 	
