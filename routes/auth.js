@@ -4,42 +4,76 @@ var app = require("../server.js").app
     , async = require('async')
     , User = require('../models/user.js');
 
+
 var user = new User(
     azure.createTableService(conf.get("STORAGE_NAME"), conf.get("STORAGE_KEY"))
     , conf.get("TABLE_NAME")
     , conf.get("PARTITION_KEY"));
 
-exports.index = function(req, res) {
+
+var passport = require('passport')
+  , FacebookStrategy = require('passport-facebook').Strategy;
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new FacebookStrategy({
+    clientID: conf.get('FACEBOOK_APP_ID'),
+    clientSecret: conf.get('FACEBOOK_APP_SECRET'),
+    callbackURL: conf.get('FACEBOOK_CALLBACK_URL')
+  },
+  function(accessToken, refreshToken, profile, done) {
+	
+	profile.accessToken = accessToken;
+
+	findOrCreateUser(profile);
+
+	return done(null, profile);
+  }
+));
+
+
+exports.attach = function(app){
+	app.get('/auth', passport.authenticate('facebook'));
+	app.get('/auth/callback', passport.authenticate('facebook', { successRedirect: '/'}));
+}
+
+
+function findOrCreateUser (profile){
 	var query = azure.TableQuery
       .select()
       .from(user.tableName)
-      .where('FacebookID eq ?', '4');
+      .where('FacebookID eq ?', profile.id);
 
     user.find(query, function (err, items) {
-		console.log("found query", items, "err", err);
+		//console.log("found query", items, "err", err);
 		if (!err) {
 			if (items.length) {
-				console.log("Items found ", items);	
-				res.send("Found user!" + items.length);
+				console.log("Items found ", items.length);	
 			}
 			else {
 				var item = {
-					"Name": "First User",
-					"FacebookID": "4",
-					"FacebookAccessToken": "NotAvailable"
+					"Name": profile.displayName,
+					"FacebookID": profile.id,
+					"FacebookAccessToken": profile.accessToken
 				};
 				user.addItem(item, function(err) {
 					if (err) {
-						res.send("Error occurred while adding", err);	
+						console.error("Error occurred while adding", err);	
 					}
 					else {
-						res.send("Added user!", item);
+						console.log("Added user!", item);
 					}
 				});
 			}
 		}
 		else {
-			res.send("Error occurred ", err);	
+			console.error("Error occurred ", err);	
 		}
     });
-};
+}
