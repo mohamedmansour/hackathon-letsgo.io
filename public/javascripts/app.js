@@ -40,8 +40,7 @@ function appActivate() {
 }
 
 
-$('#lookup, #lookupHeader').click(function(e){
-	e.preventDefault();
+function fetchLocationAndLaunchQuery(){
 
 	if ($("header").hasClass("active")) {
 		var to = $('#searchToHeader').val(),
@@ -93,4 +92,14 @@ $('#lookup, #lookupHeader').click(function(e){
 	}
 
 	appActivate();
-})
+}
+
+
+$('#lookup, #lookupHeader').click(function(e){
+	e.preventDefault();
+	return fetchLocationAndLaunchQuery();
+});
+$('input').keyup(function(e){
+	if(e.keyCode === 13)
+		return fetchLocationAndLaunchQuery();
+});
