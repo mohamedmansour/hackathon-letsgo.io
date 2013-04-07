@@ -79,7 +79,7 @@ function getPhotos() {
 
 	//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
 	getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
-		canvasPhotos = {};
+		//canvasPhotos = {};
 		
 		//map.entities.clear();
 		
