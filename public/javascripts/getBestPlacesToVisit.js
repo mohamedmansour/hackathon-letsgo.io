@@ -11,6 +11,8 @@ function getBestPlacesToVisit(topPhotos, callback) {
 		}
 	});
 	
+	var startTime = new Date();
+	
 	$.each(topPhotos, function(i,photo1) {
 		var totalDistanceFromOther = 0, distance;
 		$.each(topPhotos, function(j,photo2) {
@@ -26,6 +28,8 @@ function getBestPlacesToVisit(topPhotos, callback) {
 
 	photoSortedByDistance = topPhotos.slice(0)
 	photoSortedByDistance.sort(function(a,b) { return a.weight - b.weight; });
+	
+	console.log("Run Time = " + (new Date() - startTime));
 	
 	callback(photoSortedByDistance);
 	
