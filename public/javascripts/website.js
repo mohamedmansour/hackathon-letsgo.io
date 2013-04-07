@@ -50,7 +50,7 @@ $(document).on("click", "#welcomeScreen", function(e) {
 	if (e.target.id === 'welcomeScreen' || e.target.id === 'introLogo') appActivate();
 });
 
-$(document).on("click tap", ".mapImage", function() {
+$(document).live("touchend click", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
 	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
 	fullPicture(item.url_l);
