@@ -660,16 +660,13 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 	padding: 5px;*/
 }
 
+.gettyOption {
+	float: left !important;
+}
+
 .accountButton {
 	margin: .5em !important;
-	/*padding: 5px;
-	height: 35px;
-	background-color: #2ba6cb;
-	color: #fff;
-	font-weight: 300;
-	font-size: 1.5em;
-	line-height: 2em;
-	display: block;*/
+	float: right;
 }
 
 .button {
