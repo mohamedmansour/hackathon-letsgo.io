@@ -537,10 +537,12 @@ h1#headerBar {
 	background-position: center center;
 	background-repeat: no-repeat;
 	/*background-color: #efefef;*/
+	box-shadow: 0 0 10px rgba(0,0,0,.8);
 }
 
 #bigPicture.active {
 	right: 25% !important;
+	z-index: 999;
 	-webkit-transition: right 0.3s ease;
 	-moz-transition: right 0.3s ease;
 	-ms-transition: right 0.3s ease;
@@ -573,6 +575,8 @@ header {
 	-ms-transition: top 2s ease;
 	-o-transition: top 2s ease;
 	transition: top 2s ease;
+	z-index: 9001;
+	box-shadow: 1px 0 5px rgba(0,0,0,.4);
 }
 
 header.active {
@@ -659,18 +663,6 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 	border: 1px solid #333 !important;
 	cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
