@@ -583,6 +583,14 @@ header.active {
 	top: -.1em !important;
 }
 
+
+#headerLogo {
+	height: 2.5em;
+	padding: 1.1em 1.1em 1.1em 1.3em;
+	display: inline-block;
+	float: left;
+}
+
 input#searchToHeader, input#searchFromHeader { /*This is the button ID*/
 	height: 3.5em;
 	width: 20em;
