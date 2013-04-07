@@ -147,6 +147,12 @@ $('#lookup, #lookupHeader').click(function(e){
 	e.preventDefault();
 	return fetchLocationAndLaunchQuery();
 });
+
+$('#lookup, #lookupHeader').touchstart(function(e){
+	e.preventDefault();
+	return fetchLocationAndLaunchQuery();
+});
+
 $('input').keyup(function(e){
 	if(e.keyCode === 13)
 		return fetchLocationAndLaunchQuery();
