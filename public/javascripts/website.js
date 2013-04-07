@@ -44,6 +44,9 @@ $(document).on("click", ".mapImage", function() {
 	fullPicture(item.url_l);
 });
 
+$(document).on("keyup", function(e) {
+	if (e.keyCode === 27) smallPicture();
+});
 
 
 //Check CSS3 Filters
