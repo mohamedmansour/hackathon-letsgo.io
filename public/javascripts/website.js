@@ -6,6 +6,9 @@ function fullPicture(image) {
 function logoSize() {
     var offsert = $("#bigSearchBar").offset();
     $("#introLogo").css({height: (offsert.top/3)*2, paddingTop: offsert.top/6});
+    if($("#introLogo").hasClass("hidden")) {
+        $("#introLogo").removeClass("hidden");
+    }
 }
 
 $(document).ready(function() {
