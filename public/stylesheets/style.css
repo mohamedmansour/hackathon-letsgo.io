@@ -545,28 +545,25 @@ input#location { /*This is the button ID*/
 	width: 275px;
 	margin: 11px;
 	border: none;
+    padding-left: 1em;
 }
 
 
 input#location::-webkit-input-placeholder { /* WebKit browsers */
     color: #999;
     text-align: left;
-    padding-left: 1em;
 }
 input#location:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #999;
     text-align: left;
-    padding-left: 1em;
 }
 input#location::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: #999;
     text-align: left;
-    padding-left: 1em;
 }
 input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #999;
     text-align: left;
-    padding-left: 1em;
 }
 
 .headerMenu { /*Right Side Menu*/
