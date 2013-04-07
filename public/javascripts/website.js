@@ -23,6 +23,9 @@ $(window).resize(function() {
     logoSize();
 });
 
+$(document).on("click", "#welcomeScreen", function() {
+    appActivate();
+});
 
 $(document).on("click", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
