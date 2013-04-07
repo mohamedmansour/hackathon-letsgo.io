@@ -16,17 +16,23 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.logger('dev'));
+  app.use(express.compress());
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.session({ secret: 'keyboard cat' }));
+
+  app.use(function (req, res, next) {
+    res.removeHeader("X-Powered-By");
+    res.setHeader('X-Powered-By', 'node.js, expressJS, Bing Maps, Flickr API and probably some other cool stuff...oh and this is hosted on Windows Azure');
+    next()
+  });
 
   app.use(passport.initialize());
   app.use(passport.session());
 
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
-
 });
 
 app.configure('development', function(){

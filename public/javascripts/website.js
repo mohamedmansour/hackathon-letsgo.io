@@ -23,8 +23,8 @@ $(window).resize(function() {
     logoSize();
 });
 
-$(document).on("click", "#welcomeScreen", function() {
-    appActivate();
+$(document).on("click", "#welcomeScreen", function(e) {
+	if (e.target.id === 'welcomeScreen' || e.target.id === 'introLogo') appActivate();
 });
 
 $(document).on("click", ".mapImage", function() {
