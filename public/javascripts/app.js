@@ -5,11 +5,15 @@ var map = new Microsoft.Maps.Map(document.getElementById('mapFrame'), {
 	enableSearchLogo: false,
 	enableClickableLogo: false
 });
+
 map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
 
 map.entities.clear();
+
 Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 Microsoft.Maps.Events.addHandler(map, 'click', propagateClick);
+
+Microsoft.Maps.loadModule('Microsoft.Maps.Directions');
 
 var canvasPhotos = {};
 var photosCurrentlyOnMap = {};
@@ -102,6 +106,34 @@ function getPhotos() {
 	});
 }
 
+
+function createDirectionsManager() {
+    var directionsManager;
+    if (!directionsManager) {
+        directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+    }
+    directionsManager.resetDirections();
+    Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function() { console.log('Directions updated') });
+    return directionsManager;
+}
+
+
+function createDrivingRoute(lat1, lat2, long1, long2)
+{
+	var directionsManager = createDirectionsManager(); 
+
+	directionsManager.resetDirections();
+	// Set Route Mode to driving 
+	directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+	var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat1, long1)  });
+	directionsManager.addWaypoint(waypoint1);
+	var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat2, long2) });
+	directionsManager.addWaypoint(waypoint2);
+
+	// Set the element in which the itinerary will be rendered
+	directionsManager.calculateDirections();
+}
+
 function fetchLocationAndLaunchQuery(){
 
 	if ($("header").hasClass("active")) {
@@ -136,6 +168,9 @@ function fetchLocationAndLaunchQuery(){
 			
 			
 			//setTimeout(function() { getPhotos(); }, 2000);
+			createDrivingRoute(toLat, fromLat, toLong, fromLong);
+
+
 		});
 	}
 
