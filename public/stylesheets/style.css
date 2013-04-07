@@ -550,6 +550,23 @@ h1#headerBar {
 	transition: right 0.3s ease;
 }
 
+#bigPicture #pictureControls {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 10em;
+	height: 3em;
+	border-bottom: 1px solid rgba(50, 50, 50, 0.7);
+	border-left: 1px solid rgba(50, 50, 50, 0.7);
+	background-color: rgba(50, 50, 50, 0.45);
+}
+
+#bigPicture #pictureControls img {
+	height: 80%;
+	margin-top: 5%;
+	float: right;
+}
+
 
 #theApp {
 	position: absolute;
