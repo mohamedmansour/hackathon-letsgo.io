@@ -61,4 +61,6 @@ else {
     console.log("NO");
 }
 
+console.log(BrowserDetect.browser)
+
 
