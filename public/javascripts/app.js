@@ -11,6 +11,8 @@ map.entities.clear();
 Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 
 var canvasPhotos = {};
+var photosCurrentlyOnMap = {};
+
 
 // var limit = 5,
 // 	bounds = map.getBounds(),
@@ -22,15 +24,20 @@ var canvasPhotos = {};
 
 function renderPhoto(item) {
 	canvasPhotos[item.id] = item;
+	
 	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg"
+	
 	var pushpin = new Microsoft.Maps.Pushpin(
 		new Microsoft.Maps.Location(item.latitude, item.longitude),
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class='mapImage' data-id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
+			htmlContent: ("<div class='mapImage' data-id='" + item.id + " id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
 		}
 	);
+	
+	photosCurrentlyOnMap[item.id] = pushpin;
+	
 	map.entities.push(pushpin);
 }
 
@@ -54,8 +61,23 @@ function getPhotos() {
 	//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
 	getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
 		canvasPhotos = {};
-		map.entities.clear();
+		
+		//map.entities.clear();
+		
 		pix.slice(0,30).forEach(function(pic) {
+			var photosToDisplay = {};
+			$.each(pix, function(i,photo) {
+				photosToDisplay[photo.id] = 1;
+			});
+			
+			$.each(photosCurrentlyOnMap, function(photoid, pushpin) {
+				if (!photosToDisplay[photoid]) {
+					map.entities.remove(pushpin);
+					delete photosCurrentlyOnMap[photoid];
+					console.log("Removing " + photoid);
+				}
+			});
+			
 			renderPhoto(pic);
 		});
 	});
