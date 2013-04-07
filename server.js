@@ -8,9 +8,8 @@ var express = require('express')
   , path = require('path')
   , nconf = require('nconf');
 
-nconf.env().file({ file: "config.json"});
-
 app.configure(function(){
+  app.set("configFile", "config.json");
   app.set('conf', nconf);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -24,9 +23,12 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
+  app.set("configFile", "config_development.json");
   app.use(express.errorHandler());
 });
 
+
+nconf.env().file({ file: app.get("configFile") });
 
 var routes = require('./routes')
   , user = require('./routes/user')
