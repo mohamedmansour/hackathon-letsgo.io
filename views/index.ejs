@@ -21,6 +21,9 @@
         <input type="text" class="location" autocomplete="off" spellcheck="false" id="searchToHeader" name="location" placeholder="To:"></input>
         <a href="#" class="button" id="lookupHeader">Go!</a>
         <div class="headerMenu">
+          <div class="gettyOption">
+            <input name="gettyCheckbox" id="getty" type="checkbox" checked="on">
+          </div>
           <% if (!user) { %>
             <a href="/auth" class="button accountButton">Log In</a>
           <% } else { %>
