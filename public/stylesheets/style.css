@@ -634,6 +634,16 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 
 
 
+.mapImage {
+	font-size: 12px;
+	font-weight: bold;
+	border: solid 2px;
+	background-color: LightBlue;
+	width: 25px;
+}
+
+
+
 
 
 
