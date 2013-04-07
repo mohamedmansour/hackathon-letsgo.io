@@ -79,6 +79,11 @@ body {
    Links
    ========================================================================== */
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 /**
  * Address `outline` inconsistency between Chrome and other browsers.
  */
@@ -407,8 +412,8 @@ body {
 
 
 #mapFrame {
-	background: url("http://placekitten.com/900/900");
-	background-size: cover;
+/*	background: url("http://placekitten.com/900/900");
+	background-size: cover;*/
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -431,12 +436,13 @@ header {
 	background-color: #333;
 }
 
-input#location {
+input#location { /*This is the button ID*/
 	height: 45px;
 	width: 275px;
-	border-radius: 11px;
-	margin: 10px;
+	margin: 11px;
+	border: none;
 }
+
 
 input#location::-webkit-input-placeholder { /* WebKit browsers */
     color: #999;
@@ -459,13 +465,29 @@ input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
     padding-left: 1em;
 }
 
+.headerMenu { /*Right Side Menu*/
+	float: right;
+/*	height: 35px;
+	margin: 11px;
+	padding: 5px;*/
+}
+
+.accountButton {
+	margin: 11px !important;
+	/*padding: 5px;
+	height: 35px;
+	background-color: #2ba6cb;
+	color: #fff;
+	font-weight: 300;
+	font-size: 1.5em;
+	line-height: 2em;
+	display: block;*/
+}
+
 .button {
 	width: auto;
 	background: #2ba6cb;
-	border: 1px solid #1e728c;
-	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+	border: none;
 	color: white;
 	cursor: pointer;
 	display: inline-block;
@@ -474,7 +496,7 @@ input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
 	font-weight: bold;
 	line-height: 1;
 	margin: 0;
-	padding: 10px 20px 11px;
+	padding: 16px 20px 16px;
 	position: relative;
 	text-align: center;
 	text-decoration: none;
@@ -484,13 +506,8 @@ input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
 	transition: background-color 0.15s ease-in-out;
 }
 
-
-.button.round {
-	-webkit-border-radius: 1000px;
-	-moz-border-radius: 1000px;
-	-ms-border-radius: 1000px;
-	-o-border-radius: 1000px;
-	border-radius: 1000px;
+.button:hover, .accountButton:hover {
+	background-color: #47add9;
 }
 
 

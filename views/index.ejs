@@ -4,13 +4,14 @@
       <header>
         <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
         </input>
-        <a class="round button">Go!</a>
-
+        <a class="button">Go!</a>
+        <div class="headerMenu">
           <% if (!user) { %>
-          <h2>Welcome! Please log in. <a href="/auth">Facebook</a></h2>
-        <% } else { %>
-          <h2>Hello, <%= user.displayName %>.</h2>
-        <% } %>
+            <a href="/auth" class="button accountButton">Log In</a>
+          <% } else { %>
+            <h2>Hello, <%= user.displayName %>.</h2>
+          <% } %>
+        </div>
 
       </header>
 
