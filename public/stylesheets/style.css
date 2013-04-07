@@ -633,15 +633,12 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 }
 
 
-.mapImage {
-	font-size: 12px;
-	font-weight: bold;
-	border: solid 2px;
-	background-color: #333;
-}
-
+.mapImage {}
 .mapImage img {
 	width: 50px;
+	border-radius: 200px;
+	border: 1px solid #333 !important;
+	cursor: pointer;
 }
 
 
