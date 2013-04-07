@@ -9,7 +9,7 @@ map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
 
 map.entities.clear();
 Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
-
+Microsoft.Maps.Events.addHandler(map, 'click', propagateClick);
 
 var canvasPhotos = {};
 var photosCurrentlyOnMap = {};
@@ -153,3 +153,14 @@ $('input').keyup(function(e){
 	if(e.keyCode === 13)
 		return fetchLocationAndLaunchQuery();
 });
+
+
+
+function propagateClick (e){
+	var self = e.target;
+
+	if (e.targetType === "pushpin"){
+		var item = canvasPhotos[$(self._htmlContent).attr('data-id')];
+		fullPicture(item.url_l);
+	}
+}
