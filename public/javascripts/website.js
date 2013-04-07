@@ -12,21 +12,9 @@ function smallPicture() {
     isOpened = false;
 }
 
-// function hugePicture() {
-//     if(alreadyBig = True){
-//         $("header").removeClass("active");
-//         $("#mapFrame").addClass("imageFullScreen");
-//         $("#bigPicture").addClass("imageFullScreen");
-//         alreadyBig = true;
-//     }
-//     else {
-//         $("header").addClass("active");
-//         $("#mapFrame").removeClass("imageFullScreen");
-//         $("#bigPicture").removeClass("imageFullScreen");
-//         alreadyBig = false;
-//     }
-    
-// }
+function hugePicture() {
+
+}
 
 
 
@@ -50,7 +38,7 @@ $(document).on("click", "#welcomeScreen", function(e) {
 	if (e.target.id === 'welcomeScreen' || e.target.id === 'introLogo') appActivate();
 });
 
-$(document).live("touchend click", ".mapImage", function() {
+$(document).on("click", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
 	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
 	fullPicture(item.url_l);
