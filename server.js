@@ -35,6 +35,9 @@ var routes = require('./routes')
   , auth = require('./routes/auth');
   
 app.get('/', routes.index);
+app.get('/tos', routes.tos);
+app.get('/privacy', routes.privacy);
+app.get('/support', routes.support);
 app.get('/users', user.list);
 app.get('/auth', auth.index);
 
