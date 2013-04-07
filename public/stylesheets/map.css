@@ -3,3 +3,11 @@ header {
 	width: 100%;
 	z-index: 42;
 }
+
+.accountButton img {
+	vertical-align: middle;
+	padding-right: 4px;
+}
+.loggedIn {
+	padding: 11px 20px 11px 15px;
+}
