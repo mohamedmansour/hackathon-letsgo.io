@@ -4,8 +4,12 @@
     <div id="welcomeScreen">
       <div id="bigSearchBar">
         <h1 id="headerBar">Where would you like to go?</h1>
-        <input type="text" class="location" autocomplete="off" id="bigSearchInput" name="location" placeholder="Explore!">
-        </input>
+        <div id="searchWrapper">
+          <input type="text" class="location bigSearchInput" autocomplete="off" id="searchTo" name="location" placeholder="To:"></input>
+          <input type="text" class="location bigSearchInput" autocomplete="off" id="searchFrom" name="location" placeholder="From:"></input>
+          <a href="" class="button" onclick="appActivate();">Look Here</a>
+          <a href="" class="button second">Explore</a>
+        </div>
       </div>
     </div>
 

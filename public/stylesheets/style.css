@@ -425,7 +425,7 @@ body {
 	top: 30%;
 	right: 0;
 	left: 0%;
-	z-index: 10;
+	z-index: 31;
 	height: 265px;
 	background-color: rgba(0, 0, 0, 0.7);
 }
@@ -438,6 +438,34 @@ h1#headerBar {
 	letter-spacing: -0.04em;
 	font-size: 5em;
 	line-height: 2em;
+}
+
+#searchWrapper {
+	text-align: center;
+}
+
+#searchWrapper .button {
+	padding: 28px !important;
+	margin: 0 5px !important;
+	top: -3px !important;
+	font-size: 1.5em !important;
+}
+
+#searchWrapper .button.second {
+	margin-left: 35px;
+}
+
+.bigSearchInput {
+	display: inline-block;
+	margin: 0 auto;
+	padding: 0.1em 1em;
+	width: 340px;
+	height: 70px;
+	font-size: 2em;
+}
+
+#searchFrom {
+	margin-left: 5px;
 }
 
 #theApp.obscured {
@@ -490,17 +518,22 @@ h1#headerBar {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	-webkit-transition: all 3s ease;
+	/*-moz-transition: top 3s ease;
+	-ms-transition: top 3s ease;
+	-o-transition: top 3s ease;
+	transition: top 3s ease;*/
 }
 
 header {
 	top: -70px;
 	height: 70px;
 	background-color: #333;
-	-webkit-transition: top 0.3s ease;
-	-moz-transition: top 0.3s ease;
-	-ms-transition: top 0.3s ease;
-	-o-transition: top 0.3s ease;
-	transition: top 0.3s ease;
+	-webkit-transition: top 2s ease;
+	-moz-transition: top 2s ease;
+	-ms-transition: top 2s ease;
+	-o-transition: top 2s ease;
+	transition: top 2s ease;
 }
 
 header.active {
