@@ -10,6 +10,7 @@ map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
 map.entities.clear();
 Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 
+
 var canvasPhotos = {};
 var photosCurrentlyOnMap = {};
 
@@ -32,17 +33,35 @@ function renderPhoto(item) {
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class='mapImage' data-id='" + item.id + "'' id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
+
+			htmlContent: ("<div class='mapImage' data-id='" + item.id + "' id='" + item.id + "'></div>")
+			//htmlContent: ("<div class='mapImage' data-id='" + item.id + " id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
 		}
 	);
 	
 	photosCurrentlyOnMap[item.id] = pushpin;
 	
 	map.entities.push(pushpin);
+	
+	setTimeout(function() {
+		var imgDOM = document.createElement('img');
+		imgDOM.className = "fadeIN";
+		imgDOM.src = item.url_s; //.split('_m').join('_s');
+		imgDOM.onload = function() {
+			if (document.getElementById(item.id) && !document.getElementById(item.id).childNodes.length) {
+				document.getElementById(item.id).appendChild(imgDOM);
+				setTimeout(function(){imgDOM.classList.add('loaded');});
+			}
+		};
+	});
 }
 
 function appActivate() {
-    $("header").addClass("active");
+    var styleDOM = document.createElement('style');
+	styleDOM.innerHTML = '.fadeIN { opacity: 0; margin-top: 25px; font-size: 21px; text-align: center; -webkit-transition: opacity 0.5s ease-in; -moz-transition: opacity 0.5s ease-in; -o-transition: opacity 0.5s ease-in; -ms-transition: opacity 0.5s ease-in; transition: opacity 0.5s ease-in;} .loaded { opacity: 1;}';
+	document.body.appendChild(styleDOM);
+
+	$("header").addClass("active");
     $("#welcomeScreen").fadeOut(800);
     $("#theApp").removeClass("obscured");
 }
