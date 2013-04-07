@@ -8,4 +8,3 @@ function fullPicture(image) {
     $("#bigPicture").addClass("active");
     $("#mapFrame").addClass("sidebar");
 }
-

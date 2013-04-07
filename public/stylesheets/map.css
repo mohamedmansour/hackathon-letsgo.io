@@ -5,6 +5,10 @@ header {
 	/*top: 0;*/
 }
 
+.logoutButton {
+	margin-right: 10px;
+}
+
 .accountButton img {
 	vertical-align: middle;
 	padding-right: 4px;
