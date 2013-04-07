@@ -37,7 +37,7 @@ exports.attach = function(app) {
 			});
 		}
 		else {
-			request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + query + "&key=" + conf.get("BING_MAPS_API"), function(err, res, body) {
+			request.get("http://dev.virtualearth.net/REST/v1/Locations?q=" + encodeURIComponent(query) + "&key=" + conf.get("BING_MAPS_API"), function(err, res, body) {
 				body = JSON.parse(body);
 				if (body.statusCode === 200 && body.resourceSets.length) {
 					var coord = body.resourceSets[0].resources[0].point.coordinates;
