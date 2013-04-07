@@ -526,6 +526,10 @@ h1#headerBar {
 	left: 75%;
 }
 
+#mapframe.imageFullScreen {
+	left: 100%;
+}
+
 #bigPicture {
 	position: absolute;
 	top: 4.9em;
@@ -551,6 +555,11 @@ h1#headerBar {
 	-ms-transition: right 0.3s ease;
 	-o-transition: right 0.3s ease;
 	transition: right 0.3s ease;
+}
+
+#bigPicture.imageFullScreen {
+	top: 0 !important;
+	right: 0 !important;
 }
 
 #bigPicture #pictureControls {
