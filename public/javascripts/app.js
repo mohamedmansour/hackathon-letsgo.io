@@ -39,6 +39,26 @@ function appActivate() {
     $("#theApp").removeClass("obscured");
 }
 
+function getPhotos() {
+	// map.getBounds(); 
+	var bounds = map.getBounds();
+	console.log(bounds);
+	var halfWidth = bounds.width / 2;
+	var halfHeight = bounds.height / 2;
+	var minimumLongitude = bounds.center.longitude - halfWidth,
+		minimumLatitude = bounds.center.latitude - halfHeight,
+		maximumLongitude = bounds.center.longitude + halfWidth,
+		maximumLatitude = bounds.center.latitude + halfHeight;
+
+	//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
+	getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
+		canvasPhotos = {};
+		map.entities.clear();
+		pix.slice(0,30).forEach(function(pic) {
+			renderPhoto(pic);
+		});
+	});
+}
 
 function fetchLocationAndLaunchQuery(){
 
@@ -70,24 +90,10 @@ function fetchLocationAndLaunchQuery(){
 
 		  	map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
 			
-			// map.getBounds(); 
-			var bounds = map.getBounds();
-			console.log(bounds);
-			var halfWidth = bounds.width / 2;
-			var halfHeight = bounds.height / 2;
-			var minimumLongitude = bounds.center.longitude - halfWidth,
-			    minimumLatitude = bounds.center.latitude - halfHeight,
-			    maximumLongitude = bounds.center.longitude + halfWidth,
-			    maximumLatitude = bounds.center.latitude + halfHeight;
-
-			//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
-			getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
-				canvasPhotos = {};
-				pix.slice(0,20).forEach(function(pic) {
-					renderPhoto(pic);
-				});
-			});
-
+			//getPhotos();
+			
+			Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
+			//setTimeout(function() { getPhotos(); }, 2000);
 		});
 	}
 

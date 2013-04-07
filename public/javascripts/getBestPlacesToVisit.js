@@ -1,6 +1,11 @@
 function getBestPlacesToVisit(topPhotos, callback) {
 	"use strict";
 	
+	var maxLat = -360;
+	var maxLng = -360;
+	var minLat = 360;
+	var minLng = 360;
+	
 	var photoSortedByDistance;
 	
 	$.each(topPhotos, function(i,photo) {
@@ -8,6 +13,12 @@ function getBestPlacesToVisit(topPhotos, callback) {
 		if (typeof photo.longitude !== "number" || typeof photo.latitude !== "number") { 
 			console.error("Photo does not have a latitude or longitiude."); 
 			return; 
+		}
+		else {
+			maxLat = Math.max(maxLat, photo.latitude);
+			maxLng = Math.max(maxLng, photo.longitude);
+			minLat = Math.min(minLat, photo.latitude);
+			minLng = Math.min(minLng, photo.longitude);	
 		}
 	});
 	
@@ -23,7 +34,7 @@ function getBestPlacesToVisit(topPhotos, callback) {
 		});
 		
 		photo1.averageDistanceFromOtherPhotos = totalDistanceFromOther/(topPhotos.length);
-		photo1.weight = photo1.boringness / Math.pow(photo1.averageDistanceFromOtherPhotos + 1,3);
+		photo1.weight = 1/photo1.averageDistanceFromOtherPhotos * photo1.boringness; // / Math.pow(photo1.averageDistanceFromOtherPhotos + 1,4); // Small weight is better
 	});
 
 	photoSortedByDistance = topPhotos.slice(0)
