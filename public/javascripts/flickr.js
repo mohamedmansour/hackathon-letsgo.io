@@ -10,7 +10,7 @@ function parsePhotoSearch(response, callback) {
 		topPhotosIDs.push(v.id);
 	});
 	
-	console.log(topPhotosIDs);
+	//console.log(topPhotosIDs);
 	
 	callback(topPhotosIDs);
 	
