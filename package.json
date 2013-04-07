@@ -10,7 +10,9 @@
     "express": "3.1.x",
     "ejs": "0.8.x",
     "nconf": "0.6.x",
-    "msnodesql": "0.2.x",
-    "passport-facebook": "0.1.x"
+    "azure": "0.7.x",
+    "passport-facebook": "0.1.x",
+    "node-uuid": "1.4.x",
+    "async": "0.2.x"
   }
 }
