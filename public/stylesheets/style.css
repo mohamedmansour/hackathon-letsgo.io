@@ -542,9 +542,9 @@ header.active {
 }
 
 input#location { /*This is the button ID*/
-	height: 45px;
-	width: 275px;
-	margin: 11px;
+	height: 3.5em;
+	width: 20em;
+	margin: .6em;
 	border: none;
     padding-left: 1em;
 }
