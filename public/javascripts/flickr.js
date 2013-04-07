@@ -19,9 +19,10 @@ function parsePhotoSearch(response, callback) {
 function getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, callback) {
 	"use strict";
 
-	console.log(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude);
+	var longs = [minimumLongitude, maximumLongitude].sort(),
+		lats = [minimumLatitude, maximumLatitude].sort();
 
-	$.getJSON("http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page="+ maxCount +"&api_key=6119f02e6572a0626d9f1df373ef2bb4&min_upload_date=1212710400&bbox=" + minimumLongitude + "%2C" + minimumLatitude + "%2C" + maximumLongitude + "%2C" + maximumLatitude + "&has_geo=1&sort=interestingness-desc&extras=geo&format=json&jsoncallback=?", function(response){
+	$.getJSON("http://api.flickr.com/services/rest/?method=flickr.photos.search&per_page="+ maxCount +"&api_key=6119f02e6572a0626d9f1df373ef2bb4&min_upload_date=1212710400&bbox=" + longs[0] + "%2C" + lats[0] + "%2C" + longs[1] + "%2C" + lats[1] + "&has_geo=1&sort=interestingness-desc&extras=geo&format=json&jsoncallback=?", function(response){
 		parsePhotoSearch(response,callback);
 	});
 }
