@@ -418,8 +418,34 @@ body {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	left: 0;
-	z-index: 10; 
+	left: 0%;
+	z-index: 10;
+	-webkit-transition: left 0.3s ease;
+	-moz-transition: left 0.3s ease;
+	-ms-transition: left 0.3s ease;
+	-o-transition: left 0.3s ease;
+	transition: left 0.3s ease;
+}
+
+#mapFrame.sidebar {
+	left: 75%;
+}
+
+#bigPicture {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0%;
+	z-index: 9;
+}
+
+#bigPicture.active {
+	-webkit-transition: left 0.3s ease;
+	-moz-transition: left 0.3s ease;
+	-ms-transition: left 0.3s ease;
+	-o-transition: left 0.3s ease;
+	transition: left 0.3s ease;
 }
 
 #theApp {
@@ -432,8 +458,18 @@ body {
 }
 
 header {
+	top: -70px;
 	height: 70px;
 	background-color: #333;
+	-webkit-transition: top 0.3s ease;
+	-moz-transition: top 0.3s ease;
+	-ms-transition: top 0.3s ease;
+	-o-transition: top 0.3s ease;
+	transition: top 0.3s ease;
+}
+
+header.active {
+	top: 0 !important;
 }
 
 input#location { /*This is the button ID*/
