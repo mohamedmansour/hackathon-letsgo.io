@@ -42,6 +42,7 @@ var routes = require('./routes')
 
   
 app.get('/', routes.index);
+app.get('/home', routes.home);
 app.get('/users', user.list);
 
 auth.attach(app);

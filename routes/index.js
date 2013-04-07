@@ -21,3 +21,7 @@ exports.support = function(req, res){
 exports.privacy = function(req, res){
   res.render('privacy');
 };
+
+exports.home = function(req, res){
+  res.render('home', {user: req.user});
+};

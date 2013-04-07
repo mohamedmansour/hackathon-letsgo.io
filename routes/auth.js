@@ -40,7 +40,7 @@ passport.use(new FacebookStrategy({
 
 exports.attach = function(app){
 	app.get('/auth', passport.authenticate('facebook'));
-	app.get('/auth/callback', passport.authenticate('facebook', { successRedirect: '/'}));
+	app.get('/auth/callback', passport.authenticate('facebook', { successRedirect: '/home'}));
 }
 
 
