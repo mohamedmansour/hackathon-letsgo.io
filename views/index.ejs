@@ -1,18 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>WOOP</p>
-    <div id="map_canvas"></div>
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  </body>
-</html>
+<% include header %>
+
+
+    <div id="welcomeScreen">
+      <div id="bigSearchBar">
+        <h1 id="headerBar">Where would you like to go?</h1>
+        <div id="searchWrapper">
+          <input type="text" class="location bigSearchInput" autocomplete="off" id="searchTo" name="location" placeholder="To:"></input>
+          <input type="text" class="location bigSearchInput" autocomplete="off" id="searchFrom" name="location" placeholder="From:"></input>
+          <a href="#" class="button" onclick="appActivate(); return false;">Look Here</a>
+          <a href="#" class="button second">Explore</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="theApp" class="obscured">
+      <header>
+        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?">
+        </input>
+        <a class="button">Go!</a>
+        <div class="headerMenu">
+          <% if (!user) { %>
+            <a href="/auth" class="button accountButton">Log In</a>
+          <% } else { %>
+            <span class="button accountButton loggedIn">
+              <img src="http://avatars.io/facebook/<%=user.username%>?size=small" width="26" height="26">
+              <%= user.displayName %>
+            </span>
+            <a href="/auth/logout/" class="button logoutButton">
+              Logout
+            </a>
+          <% } %>
+        </div>
+
+      </header> <!-- //END Header -->
+      <div id="bigPicture"></div>
+  		<div id="mapFrame"></div>
+    </div> <!-- //END theApp -->
+
+<% include footer %>
