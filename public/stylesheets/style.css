@@ -407,7 +407,7 @@ table {
 
 body {
   padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 
@@ -445,14 +445,14 @@ h1#headerBar {
 }
 
 #searchWrapper .button {
-	padding: 28px !important;
-	margin: 0 5px !important;
-	top: -3px !important;
+	padding: 1.4em !important;
+	margin: 0 0.2em !important;
+	top: -0.15em !important;
 	font-size: 1.5em !important;
 }
 
 #searchWrapper .button.second {
-	margin-left: 35px;
+	margin-left: 0.5em !important;
 }
 
 .bigSearchInput {
@@ -465,7 +465,7 @@ h1#headerBar {
 }
 
 #searchFrom {
-	margin-left: 5px;
+	margin-left: .1em;
 }
 
 #theApp.obscured {
@@ -575,7 +575,7 @@ input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 
 .accountButton {
-	margin: 11px !important;
+	margin: .5em !important;
 	/*padding: 5px;
 	height: 35px;
 	background-color: #2ba6cb;
@@ -594,11 +594,11 @@ input#location:-ms-input-placeholder { /* Internet Explorer 10+ */
 	cursor: pointer;
 	display: inline-block;
 	font-family: inherit;
-	font-size: 14px;
+	/*font-size: 14px;*/
 	font-weight: bold;
 	line-height: 1;
 	margin: 0;
-	padding: 16px 20px 16px;
+	padding: 1.3em 2em 1.3em;
 	position: relative;
 	text-align: center;
 	text-decoration: none;
