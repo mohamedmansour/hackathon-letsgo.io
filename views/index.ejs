@@ -9,7 +9,7 @@
           <% if (!user) { %>
             <a href="/auth" class="button accountButton">Log In</a>
           <% } else { %>
-            <h2>Hello, <%= user.displayName %>.</h2>
+            <a href="/auth" class="button accountButton"><%= user.displayName %>.</a>
           <% } %>
         </div>
 
