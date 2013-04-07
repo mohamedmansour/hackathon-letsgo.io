@@ -6,8 +6,8 @@
       <div id="bigSearchBar">
         <h1 id="headerBar">Where would you like to go?</h1>
         <div id="searchWrapper">
-          <input type="text" class="location bigSearchInput" autocomplete="off" id="searchTo" name="location" placeholder="To:"></input>
           <input type="text" class="location bigSearchInput" autocomplete="off" id="searchFrom" name="location" placeholder="From:"></input>
+          <input type="text" class="location bigSearchInput" autocomplete="off" id="searchTo" name="location" placeholder="To:"></input>
           <a href="#" class="button" id="lookup">Look Here</a>
           <a href="#" class="button second" id="explore">Explore</a>
         </div>
@@ -16,8 +16,8 @@
 
     <div id="theApp" class="obscured">
       <header>
-        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?"></input>
-        <input type="text" class="location" autocomplete="off" id="location" name="location" placeholder="Where do you want to go?"></input>
+        <input type="text" class="location" autocomplete="off" id="searchFromHeader" name="location" placeholder="From:"></input>
+        <input type="text" class="location" autocomplete="off" id="searchToHeader" name="location" placeholder="To:"></input>
         <a class="button">Go!</a>
         <div class="headerMenu">
           <% if (!user) { %>
