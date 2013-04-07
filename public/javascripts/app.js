@@ -69,7 +69,7 @@ $('#lookup').click(function(e){
 			//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
 			getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
 				canvasPhotos = {};
-				pix.forEach(function(pic) {
+				pix.slice(0,20).forEach(function(pic) {
 					renderPhoto(pic);
 				});
 			});

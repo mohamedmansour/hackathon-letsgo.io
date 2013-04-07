@@ -22,8 +22,8 @@ function getBestPlacesToVisit(topPhotos, callback) {
 			}
 		});
 		
-		photo1.averageDistanceFromOtherPhotos = totalDistanceFromOther/(topPhotos.length-1);
-		photo1.weight = photo1.averageDistanceFromOtherPhotos * photo1.boringness * photo1.boringness;
+		photo1.averageDistanceFromOtherPhotos = totalDistanceFromOther/(topPhotos.length);
+		photo1.weight = photo1.boringness / Math.pow(photo1.averageDistanceFromOtherPhotos + 1,3);
 	});
 
 	photoSortedByDistance = topPhotos.slice(0)
