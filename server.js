@@ -40,7 +40,9 @@ var routes = require('./routes')
   , user = require('./routes/user')
   , auth = require('./routes/auth');
 
-  
+
+app.set('mapsKey', conf.get("BING_MAPS_API"));
+
 app.get('/', routes.index);
 app.get('/home', routes.home);
 app.get('/users', user.list);

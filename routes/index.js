@@ -1,4 +1,5 @@
-
+app = require("../server.js").app
+	, conf = app.get("conf");
 /*
  * GET home page.
  */
@@ -23,5 +24,5 @@ exports.privacy = function(req, res){
 };
 
 exports.home = function(req, res){
-  res.render('home', {user: req.user});
+  res.render('home', {user: req.user });
 };
