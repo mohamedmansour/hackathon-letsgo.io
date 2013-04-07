@@ -557,18 +557,24 @@ h1#headerBar {
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 10em;
-	height: 3em;
 	border-bottom: 1px solid rgba(50, 50, 50, 0.7);
 	border-left: 1px solid rgba(50, 50, 50, 0.7);
 	background-color: rgba(50, 50, 50, 0.45);
 }
 
 #bigPicture #pictureControls img {
-	height: 80%;
-	margin-top: 5%;
+	height: 2em;
+	padding: 0.5em;
+	opacity: .6;
 	float: right;
+	cursor: pointer;
 }
+
+#bigPicture #pictureControls img:hover {
+	opacity: 1;
+}
+
+
 
 
 #theApp {

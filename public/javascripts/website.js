@@ -1,11 +1,22 @@
 var isOpened = false;
 
 function fullPicture(image) {
-    console.log(image);
     $("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
     $("#mapFrame").addClass("sidebar");
     isOpened = true;
 }
+
+function smallPicture() {
+    $("#bigPicture").removeClass("active");
+    $("#mapFrame").removeClass("sidebar");
+    isOpened = false;
+}
+
+function hugePicture() {
+
+}
+
+
 
 function logoSize() {
     var offsert = $("#bigSearchBar").offset();
@@ -61,6 +72,5 @@ else {
     console.log("NO");
 }
 
-console.log(BrowserDetect.browser)
 
 
