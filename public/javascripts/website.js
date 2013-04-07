@@ -1,5 +1,6 @@
 function fullPicture(image) {
-    $("#bigPicture").addClass("active");
+    console.log(image);
+    $("#bigPicture").css({'background-size':'url('+image+')'}).addClass("active");
     $("#mapFrame").addClass("sidebar");
 }
 
@@ -22,7 +23,6 @@ $(window).resize(function() {
 
 $(document).on("click", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
-	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
-	console.log(src);
-	fullPicture();
+	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg";
+	fullPicture(src);
 });

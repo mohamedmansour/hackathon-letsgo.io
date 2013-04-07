@@ -521,15 +521,21 @@ h1#headerBar {
 	bottom: 0;
 	left: 0%;
 	z-index: 9;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 #bigPicture.active {
+	left: 75% !important;
 	-webkit-transition: left 0.3s ease;
 	-moz-transition: left 0.3s ease;
 	-ms-transition: left 0.3s ease;
 	-o-transition: left 0.3s ease;
 	transition: left 0.3s ease;
 }
+
 
 #theApp {
 	position: absolute;
