@@ -56,6 +56,11 @@ $(document).on("click", ".mapImage", function() {
 	fullPicture(item.url_l);
 });
 
+// $(document).on("click", "#bigPicture", function() {
+//     alert("MERP!");
+//     window.open("http://flickr.com/photos/" + canvasPhotos['2588515847'].owner + "/" + canvasPhotos['2588515847'].id, "_blank");
+// })
+
 $(document).on("touchstart", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
 	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
@@ -87,12 +92,12 @@ $(document).on("keyup", function(e) {
 
 // alert(css3FilterFeatureDetect());
 
-if (document.body.style.filter !== undefined) {
-    console.log("YES");
-}
-else {
-    console.log("NO");
-}
+// if (document.body.style.filter !== undefined) {
+//     console.log("YES");
+// }
+// else {
+//     console.log("NO");
+// }
 
 
 
