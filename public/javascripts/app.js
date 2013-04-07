@@ -18,13 +18,13 @@ map.entities.clear();
 // 	lonDiff =  bounds.width/2;
 
 function renderPhoto(item) {
-	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg"
+	var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg"
 	var pushpin = new Microsoft.Maps.Pushpin(
 		new Microsoft.Maps.Location(item.latitude, item.longitude),
 		 {
 			width: null,
 			height: null,
-			htmlContent: ("<div class="+"mapImage"+"><img src='"  + src + "' /></div>")
+			htmlContent: ("<div class='mapImage'><img src='"  + src + "' /></div>")
 		}
 	);
 	map.entities.push(pushpin);
