@@ -31,10 +31,10 @@ Technologies Used
 How to Install
 ==============
 
-# Make sure you clone this repo
-# Copy config.json.defaults to config_development.json and fill in your API keys
-# Run "npm install" from the root project directory
-# Then just run node "npm start" from the root
-# Visit http://localhost:3000, to allow OAuth with Facebook to work, just update your hosts to point letsgo.io to localhost and just visit http://letsgo.io:3000
+1. Make sure you clone this repo
+2. Copy config.json.defaults to config_development.json and fill in your API keys
+3. Run "npm install" from the root project directory
+4. Then just run node "npm start" from the root
+5. Visit http://localhost:3000, to allow OAuth with Facebook to work, just update your hosts to point letsgo.io to localhost and just visit http://letsgo.io:3000
 
 Please submit pull requests so we can make this project more awesome :)
