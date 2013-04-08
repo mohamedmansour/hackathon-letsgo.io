@@ -56,7 +56,6 @@ function ensureAuthenticated(req, res, next) {
 app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
 app.get('/', routes.index);
-app.get('/closet', routes.closet);
 app.get('/users', user.list);
 
 auth.attach(app);
