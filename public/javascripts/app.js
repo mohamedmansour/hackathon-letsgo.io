@@ -125,10 +125,10 @@ function createDrivingRoute(lat1, lat2, long1, long2)
 	directionsManager.resetDirections();
 	// Set Route Mode to driving 
 	directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-	var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat1, long1)  });
-	directionsManager.addWaypoint(waypoint1);
-	var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat2, long2) });
+	var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat1, long1)  }),
+     	    waypoint2 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat2, long2) });
 	directionsManager.addWaypoint(waypoint2);
+	directionsManager.addWaypoint(waypoint1);
 
 	// Set the element in which the itinerary will be rendered
 	directionsManager.calculateDirections();
