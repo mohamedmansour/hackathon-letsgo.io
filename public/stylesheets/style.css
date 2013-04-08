@@ -733,3 +733,20 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 		font-size:4em;
 	}
 }
+
+footer {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	background-color: rgba(255,255,255,0.5);
+	z-index: 9999;
+	color: #333;
+	padding: 10px;
+	text-shadow: 1px 1px 0 #888;
+	font-size:0.9em;
+}
+
+footer a {
+	color: #04c;
+}-
+
