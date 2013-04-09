@@ -47,10 +47,13 @@ function renderPhoto(item) {
 	
 	map.entities.push(pushpin);
 	
+	// TODO @jeremybenaim : use documentFragment to speed up all the thing	
 	setTimeout(function() {
 		var imgDOM = document.createElement('img');
 		imgDOM.className = "fadeIN";
-		imgDOM.src = item.url_sq; //.split('_m').join('_s');
+		imgDOM.width = 75;
+		imgDOM.height = 75;
+		imgDOM.src = item.url_sq;
 		imgDOM.onload = function() {
 			if (document.getElementById(item.id) && !document.getElementById(item.id).childNodes.length) {
 				document.getElementById(item.id).appendChild(imgDOM);
