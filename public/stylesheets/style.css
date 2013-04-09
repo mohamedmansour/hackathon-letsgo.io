@@ -699,9 +699,9 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 
 .mapImage {}
 .mapImage img {
-	width: 100px;
-	height: 100px;
-	border-radius: 200px;
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
 	border: 1px solid #333 !important;
 	cursor: pointer;
 }
