@@ -19,7 +19,7 @@ Microsoft.Maps.loadModule('Microsoft.Maps.Search');
 var canvasPhotos = {};
 var photosCurrentlyOnMap = {};
 
-var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+// var searchManager = new Microsoft.Maps.Search.SearchManager(map);
 
 // var limit = 5,
 // 	bounds = map.getBounds(),
