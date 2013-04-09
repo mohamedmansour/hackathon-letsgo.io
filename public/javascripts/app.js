@@ -50,7 +50,7 @@ function renderPhoto(item) {
 	setTimeout(function() {
 		var imgDOM = document.createElement('img');
 		imgDOM.className = "fadeIN";
-		imgDOM.src = item.url_s; //.split('_m').join('_s');
+		imgDOM.src = item.url_sq; //.split('_m').join('_s');
 		imgDOM.onload = function() {
 			if (document.getElementById(item.id) && !document.getElementById(item.id).childNodes.length) {
 				document.getElementById(item.id).appendChild(imgDOM);
