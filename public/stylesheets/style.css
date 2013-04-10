@@ -730,6 +730,9 @@ footer a {
 	input#searchToHeader, input#searchFromHeader {
 		width: 15em;
 	}
+	h1#headerBar {
+		font-size:4em;
+	}
 	header.active {
 		height: auto;
 	} 
@@ -745,16 +748,20 @@ footer a {
 	}
 	#bigSearchBar {
 		top: 25%;
+		padding: 0;
 	}
 	h1#headerBar {
-		font-size:4em;
+		font-size:3em;
 	}
 	footer {
 		display: none;
 	}
 	#searchWrapper input {
 		display: block;
-		margin: 0 auto;
+		margin: 10px auto;
+		padding: 10px;
+		height: auto;
+		width: auto;
 	}
 	.mapImage img {
 		width: 50px;
