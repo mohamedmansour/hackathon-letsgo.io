@@ -48,6 +48,8 @@ function getBestPlacesToVisit(topPhotos, callback) {
 
 
 function cityDistanceRealEarth(location1,location2) {
+	"use strict";
+
 	var location1Lat = Math.PI * location1.lat/180;
 	var location1Lng = Math.PI * location1.lng/180;
 	var location2Lat = Math.PI * location2.lat/180;

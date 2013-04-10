@@ -3,13 +3,16 @@ var isOpened = false;
 function fullPicture(image) {
     $("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
     $("#mapFrame").addClass("sidebar");
-    isOpened = true;
+    
+	if (!isOpened) _gaq.push(['_trackEvent', 'Photo', 'OpenedFullPictureViewer', image]);
+	isOpened = true;
 }
 
 function smallPicture() {
     $("#bigPicture").removeClass("active");
     $("#mapFrame").removeClass("sidebar");
-    isOpened = false;
+    if (isOpened) _gaq.push(['_trackEvent', 'Photo', 'ClosedFullPictureViewer']);
+	isOpened = false;
 }
 
 // function hugePicture() {

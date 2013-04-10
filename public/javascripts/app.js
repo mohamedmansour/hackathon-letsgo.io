@@ -75,6 +75,9 @@ function appActivate() {
     $("#theApp").removeClass("obscured");
 }
 
+var photoSetRequested = 0;
+var photoSetOnDisplay = 0;
+
 function getPhotos() {
 	// map.getBounds(); 
 	var bounds = map.getBounds();
@@ -85,28 +88,42 @@ function getPhotos() {
 		minimumLatitude = bounds.center.latitude - halfHeight,
 		maximumLongitude = bounds.center.longitude + halfWidth,
 		maximumLatitude = bounds.center.latitude + halfHeight;
-
+	var thisPhotoSet = photoSetRequested+1;
+	
+	photoSetRequested += 1;
+	
 	//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
 	getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
+		var photoSliced = pix.slice(0,30);
 		//canvasPhotos = {};
 		
-		//map.entities.clear();
+		if (!photoSliced || !photoSliced.length) return;
 		
-		pix.slice(0,30).forEach(function(pic) {
-			var photosToDisplay = {};
-			$.each(pix, function(i,photo) {
-				photosToDisplay[photo.id] = 1;
-			});
+		if (thisPhotoSet < photoSetOnDisplay) { console.log("Photos returned out of order. Currently displaying #" + photoSetOnDisplay + ", incomming is #" + thisPhotoSet); return; }
+		
+		photoSetOnDisplay = thisPhotoSet;
+		
+		//map.entities.clear();
+	
+		_gaq.push(['_trackEvent', 'Map', 'ReceivedPhotosInBoundingBox', minimumLongitude + ", " + minimumLatitude + ", " + maximumLongitude + ", " + maximumLatitude, pix.length]);
+		
+		var photosToDisplay = {};
+		$.each(photoSliced, function(i,photo) {
+			photosToDisplay[photo.id] = 1;
+		});
+		
+		$.each(photosCurrentlyOnMap, function(photoid, pushpin) {
+			if (!photosToDisplay[photoid]) {
+				map.entities.remove(pushpin);
+				delete photosCurrentlyOnMap[photoid];
+				console.log("Removing id=" + photoid);
+			}
+		});
+		
+		photoSliced.forEach(function(pic) {
+			"use strict";
 			
-			$.each(photosCurrentlyOnMap, function(photoid, pushpin) {
-				if (!photosToDisplay[photoid]) {
-					map.entities.remove(pushpin);
-					delete photosCurrentlyOnMap[photoid];
-					console.log("Removing " + photoid);
-				}
-			});
-			
-			renderPhoto(pic);
+			if (!photosCurrentlyOnMap[pic.id]) renderPhoto(pic);
 		});
 	});
 }
@@ -140,6 +157,7 @@ function createDrivingRoute(lat1, lat2, long1, long2)
 }
 
 function fetchLocationAndLaunchQuery(){
+	var ajaxStartTime;
 
 	if ($("header").hasClass("active")) {
 		var to = $('#searchToHeader').val(),
@@ -160,12 +178,14 @@ function fetchLocationAndLaunchQuery(){
     map.entities.clear(); 
 
 	if (to.length && from.length){
-
+		ajaxStartTime = new Date();
 		$.getJSON('/api/locationsearch?q='+to+'&q='+from, function(resp){
 		  	var toLat = resp.coordinates[0].latitude,
 		  		toLong = resp.coordinates[0].longitude,
 		  		fromLat = resp.coordinates[1].latitude,
 		  		fromLong = resp.coordinates[1].longitude;
+
+			_gaq.push(['_trackEvent', 'AjaxLoadTime', 'LocationSearch', '/api/locationsearch?q='+to+'&q='+from, ((new Date())-ajaxStartTime)]);
 
 		  	map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
 			
@@ -177,6 +197,8 @@ function fetchLocationAndLaunchQuery(){
 
 
 		});
+		
+		_gaq.push(['_trackEvent', 'Map', 'DirectionSearch', '[' + from + '] to [' + to + ']']);
 	}
 
 	appActivate();
@@ -202,5 +224,6 @@ function propagateClick (e){
 	if (e.targetType === "pushpin"){
 		var item = canvasPhotos[$(self._htmlContent).attr('data-id')];
 		fullPicture(item.url_l);
+		_gaq.push(['_trackEvent', 'Map', 'CirclePhotoClick', item.url_l]);
 	}
 }
