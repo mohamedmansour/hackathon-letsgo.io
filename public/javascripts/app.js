@@ -30,8 +30,8 @@ function renderPhoto(item) {
 	
 	var pushpin = new Microsoft.Maps.Pushpin(
 		new Microsoft.Maps.Location(item.latitude, item.longitude), {
-			width: null,
-			height: null,
+			width: 75,
+			height: 75,
 			htmlContent: ("<div class='mapImage' data-id='" + item.id + "' id='" + item.id + "'></div>")
 		}
 	);
