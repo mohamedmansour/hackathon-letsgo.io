@@ -1,4 +1,3 @@
-// Bing maps hacking stuff go here
 var map = new Microsoft.Maps.Map(document.getElementById('mapFrame'), {
 	credentials: PHD4.mapsKey,
 	showDashboard: false,
@@ -6,53 +5,39 @@ var map = new Microsoft.Maps.Map(document.getElementById('mapFrame'), {
 	enableClickableLogo: false
 });
 
-map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
-
-map.entities.clear();
+var canvasPhotos = {},
+	photosCurrentlyOnMap = {},
+	searchManager;
 
 var firstRun = true;
 
-Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 Microsoft.Maps.Events.addHandler(map, 'click', propagateClick);
+Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 Microsoft.Maps.Events.addHandler(map, "viewchangeend", function(){ if (firstRun) { firstRun=false; restoreStateFromUrl(); }});
 
 Microsoft.Maps.loadModule('Microsoft.Maps.Directions');
-Microsoft.Maps.loadModule('Microsoft.Maps.Search');
+Microsoft.Maps.loadModule('Microsoft.Maps.Search', function(){
+	searchManager = new Microsoft.Maps.Search.SearchManager(map);
+});
 
-var canvasPhotos = {};
-var photosCurrentlyOnMap = {};
-
-// var searchManager = new Microsoft.Maps.Search.SearchManager(map);
-
-// var limit = 5,
-// 	bounds = map.getBounds(),
-// 	latlon = bounds.getNorthwest(),
-// 	lat = latlon.latitude - bounds.height/4,
-// 	lon = latlon.longitude + bounds.width/4,
-// 	latDiff =  bounds.height/2,
-// 	lonDiff =  bounds.width/2;
+map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
+map.entities.clear();
 
 function renderPhoto(item) {
 	canvasPhotos[item.id] = item;
 	
-	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_s.jpg"
-	
 	var pushpin = new Microsoft.Maps.Pushpin(
-		new Microsoft.Maps.Location(item.latitude, item.longitude),
-		 {
+		new Microsoft.Maps.Location(item.latitude, item.longitude), {
 			width: null,
 			height: null,
-
 			htmlContent: ("<div class='mapImage' data-id='" + item.id + "' id='" + item.id + "'></div>")
-			//htmlContent: ("<div class='mapImage' data-id='" + item.id + " id='" + item.id + "'><img src='"  + item.url_s + "' /></div>")
 		}
 	);
 	
 	photosCurrentlyOnMap[item.id] = pushpin;
 	
 	map.entities.push(pushpin);
-	
-	// TODO @jeremybenaim : use documentFragment to speed up all the thing	
+
 	setTimeout(function() {
 		var imgDOM = document.createElement('img');
 		imgDOM.className = "fadeIN";
@@ -69,13 +54,13 @@ function renderPhoto(item) {
 }
 
 function appActivate() {
-    var styleDOM = document.createElement('style');
+	var styleDOM = document.createElement('style');
 	styleDOM.innerHTML = '.fadeIN { opacity: 0; margin-top: 25px; font-size: 21px; text-align: center; -webkit-transition: opacity 0.5s ease-in; -moz-transition: opacity 0.5s ease-in; -o-transition: opacity 0.5s ease-in; -ms-transition: opacity 0.5s ease-in; transition: opacity 0.5s ease-in;} .loaded { opacity: 1;}';
 	document.body.appendChild(styleDOM);
 
 	$("header").addClass("active");
-    $("#welcomeScreen").fadeOut(800);
-    $("#theApp").removeClass("obscured");
+	$("#welcomeScreen").fadeOut(800);
+	$("#theApp").removeClass("obscured");
 }
 
 var photoSetRequested = 0;
@@ -126,41 +111,37 @@ function getPhotos() {
 		photoSliced.forEach(function(pic) {
 			"use strict";
 			
-			if (!photosCurrentlyOnMap[pic.id]) renderPhoto(pic);
+			if (!photosCurrentlyOnMap[pic.id] && pic.url_l) renderPhoto(pic);
 		});
 	});
 }
 
 
-function createDirectionsManager() {
-    var directionsManager;
-    if (!directionsManager) {
-        directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-    }
-    directionsManager.resetDirections();
-    Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function() { console.log('Directions updated') });
-    return directionsManager;
-}
 
-
-function createDrivingRoute(lat1, lat2, long1, long2)
-{
-	var directionsManager = createDirectionsManager(); 
+function createDrivingRoute(fromLat, toLat, fromLong, toLong) {
+	var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+	
+	Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function() {console.log('Directions updated') });
 
 	directionsManager.resetDirections();
-	// Set Route Mode to driving 
-	directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-	var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat1, long1)  }),
-     	    waypoint2 = new Microsoft.Maps.Directions.Waypoint({ location: new Microsoft.Maps.Location(lat2, long2) });
-	directionsManager.addWaypoint(waypoint2);
-	directionsManager.addWaypoint(waypoint1);
+	directionsManager.setRequestOptions({routeMode: Microsoft.Maps.Directions.RouteMode.driving });
 
-	// Set the element in which the itinerary will be rendered
+	var start = new Microsoft.Maps.Directions.Waypoint({
+			location: new Microsoft.Maps.Location(fromLat, fromLong)
+		}),
+		stop = new Microsoft.Maps.Directions.Waypoint({
+			location: new Microsoft.Maps.Location(toLat, toLong)
+		});
+
+	directionsManager.addWaypoint(start);
+	directionsManager.addWaypoint(stop);
+
 	directionsManager.calculateDirections();
 }
 
 function fetchLocationAndLaunchQuery(){
-	var ajaxStartTime;
+	var searchManager = searchManager || new Microsoft.Maps.Search.SearchManager(map),
+		fromLat, toLat, fromLong, toLong;
 
 	if ($("header").hasClass("active")) {
 		var to = $('#searchToHeader').val(),
@@ -173,38 +154,40 @@ function fetchLocationAndLaunchQuery(){
 		$('#searchToHeader').val(to);
 	}
 
-    if(isOpened){
-	    $("#bigPicture").removeClass("active");
-	    $("#mapFrame").removeClass("sidebar");
-    }
+	if(isOpened){
+		$("#bigPicture").removeClass("active");
+		$("#mapFrame").removeClass("sidebar");
+	}
 
-    map.entities.clear(); 
+	map.entities.clear(); 
 
 	if (to.length && from.length){
-		ajaxStartTime = new Date();
-		$.getJSON('/api/locationsearch?q='+to+'&q='+from, function(resp){
-		  	var toLat = resp.coordinates[0].latitude,
-		  		toLong = resp.coordinates[0].longitude,
-		  		fromLat = resp.coordinates[1].latitude,
-		  		fromLong = resp.coordinates[1].longitude;
 
-			_gaq.push(['_trackEvent', 'AjaxLoadTime', 'LocationSearch', '/api/locationsearch?q='+to+'&q='+from, ((new Date())-ajaxStartTime)]);
+		var geocodeRequestFrom = {where:from, count:1, callback:function(geocodeResult){
 
-		  	map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
-			
-			//getPhotos();
-			
-			
-			//setTimeout(function() { getPhotos(); }, 2000);
-			createDrivingRoute(toLat, fromLat, toLong, fromLong);
-			
-			urlState.from = from;
-			urlState.q = to;
-			urlState.wp = [fromLat, fromLong, toLat, toLong];
+			var geoCodeResultFrom = geocodeResult.results[0].location;
+			fromLat = geoCodeResultFrom.latitude;
+			fromLong = geoCodeResultFrom.longitude;
 
-		});
-		
-		_gaq.push(['_trackEvent', 'Map', 'DirectionSearch', '[' + from + '] to [' + to + ']']);
+			geocodeRequestTo = {where:to, count:1, callback:function(geocodeResult){
+				var geoCodeResultTo = geocodeResult.results[0].location;
+				toLat = geoCodeResultTo.latitude
+				toLong = geoCodeResultTo.longitude
+				
+				map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
+				createDrivingRoute(fromLat, toLat, fromLong, toLong);
+						
+				urlState.from = from;
+				urlState.q = to;
+				urlState.wp = [fromLat, fromLong, toLat, toLong];
+
+				_gaq.push(['_trackEvent', 'Map', 'DirectionSearch', '[' + from + '] to [' + to + ']']);
+			}};
+			
+			searchManager.geocode(geocodeRequestTo);
+		}};
+
+		searchManager.geocode(geocodeRequestFrom);
 	}
 
 	appActivate();
@@ -216,17 +199,12 @@ $('#lookup, #lookupHeader').click(function(e){
 	return fetchLocationAndLaunchQuery();
 });
 
-
 $('input').keypress(function(e){
-	if(e.keyCode === 13)
-		return fetchLocationAndLaunchQuery();
+	if(e.keyCode === 13) return fetchLocationAndLaunchQuery();
 });
-
-
 
 function propagateClick (e){
 	var self = e.target;
-
 	if (e.targetType === "pushpin"){
 		var item = canvasPhotos[$(self._htmlContent).attr('data-id')];
 		fullPicture(item.url_l, item.id);

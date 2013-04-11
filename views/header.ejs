@@ -8,14 +8,7 @@
     <title>LetsGo - Discover Scenic Highways and Byways</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/map.css" />
-    <script>
-      if (window.location.hash == '#_=_') {window.location.hash = ''; history.pushState('', document.title, window.location.pathname);}
-      
-      var PHD4 = {
-        mapsKey: "<%- settings.mapsKey %>",
-        currentLocation: <%- location %>
-      };
-    </script>
+    <script>if (window.location.hash == '#_=_') {window.location.hash = ''; history.pushState('', document.title, window.location.pathname);}</script>
     <meta name="google-site-verification" content="5IR88rxZVzs03hKg6hfbxF-_CYvclDbOv-P6o3FWAFM" />
   </head>
   <body>

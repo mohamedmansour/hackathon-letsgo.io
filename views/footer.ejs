@@ -1,14 +1,14 @@
   <footer>
   	Powered by <a href="http://nodejs.org/">Node.js</a> hosted on <a href="http://www.windowsazure.com">Windows Azure</a> with <a href="http://bing.com/maps/">Bing Maps</a></a>
   </footer>
+  <script>var PHD4 = {mapsKey: "<%- settings.mapsKey %>"};</script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+  <script src="//ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
   <script src="/javascripts/getBestPlacesToVisit.js"></script>
   <script src="/javascripts/flickr.js"></script>
-  <script src="/javascripts/app.js"></script>
   <script src="/javascripts/website.js"></script>
-  <script type="text/javascript">
-
+  <script src="/javascripts/app.js"></script>
+  <script>
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-39924021-1']);
 	  _gaq.push(['_trackPageview']);
@@ -18,7 +18,6 @@
 	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
-
 	</script>
   </body>
 </html>
