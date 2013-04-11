@@ -10,8 +10,11 @@ map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
 
 map.entities.clear();
 
+var firstRun = true;
+
 Microsoft.Maps.Events.addHandler(map, "viewchangeend", getPhotos);
 Microsoft.Maps.Events.addHandler(map, 'click', propagateClick);
+Microsoft.Maps.Events.addHandler(map, "viewchangeend", function(){ if (firstRun) { firstRun=false; restoreStateFromUrl(); }});
 
 Microsoft.Maps.loadModule('Microsoft.Maps.Directions');
 Microsoft.Maps.loadModule('Microsoft.Maps.Search');

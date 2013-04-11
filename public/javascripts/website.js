@@ -43,6 +43,48 @@ function smallPicture() {
     
 // }
 
+function restoreStateFromUrl() {
+	"use strict";
+	
+	var queryTerms = {}, query, queryParameterSplit, fromLat, fromLong, toLat, toLong;
+	
+	query = document.location.search;
+	urlState = {q:null,from:null,wp:[],pids:[],dpid:null}
+	
+	if (query && query.length) {
+		query = query.slice(1); // Remove the '?' at the start.
+		$.each(query.split('&'), function(i,queryParameter) {
+			queryParameterSplit = queryParameter.split('=');
+			queryTerms[queryParameterSplit[0]] = queryParameterSplit[1];
+		});
+		
+		if (queryTerms.q && queryTerms.q.length) { urlState.q = decodeURIComponent(queryTerms.q).split('+').join(' '); }
+		if (queryTerms.from && queryTerms.from.length) { urlState.from = decodeURIComponent(queryTerms.from).split('+').join(' '); }
+		if (queryTerms.wp && queryTerms.wp.length) { urlState.wp = decodeURIComponent(queryTerms.wp).split(','); }
+		if (queryTerms.pids && queryTerms.pids.length) { urlState.pids = decodeURIComponent(queryTerms.pids).split(','); }
+		if (queryTerms.dpid && queryTerms.dpid.length) { urlState.dpid = decodeURIComponent(queryTerms.dpid); }
+		
+		if (urlState.q) { $('#searchTo').val(urlState.q); $('#searchToHeader').val(urlState.q); }
+		if (urlState.from) { $('#searchFrom').val(urlState.from); $('#searchFromHeader').val(urlState.from); }
+		if (urlState.pids) {
+			// ToDo: Search for all images referenced here to make sure we have their metadata in the cache. Then set the photos to be selected in their itinerary.
+		}
+		if (urlState.dpid) {
+			// ToDo: Search for the image referenced here to make sure we have its metadata in the cache. Then set the photo to be shown in the large picture viewer.
+		}
+		if (urlState.wp && urlState.wp.length >= 4) {
+			fromLat = urlState.wp[0];
+			fromLong = urlState.wp[1];
+			toLong = urlState.wp[urlState.wp.length-1];
+			toLat = urlState.wp[urlState.wp.length-2];
+			map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
+			createDrivingRoute(toLat, fromLat, toLong, fromLong);
+			appActivate(); // Hide the start model screen
+		}
+		
+	}
+}
+
 function getUrl() {
 	"use strict";
 
