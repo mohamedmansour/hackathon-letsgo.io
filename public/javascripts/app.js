@@ -194,7 +194,10 @@ function fetchLocationAndLaunchQuery(){
 			
 			//setTimeout(function() { getPhotos(); }, 2000);
 			createDrivingRoute(toLat, fromLat, toLong, fromLong);
-
+			
+			urlState.from = from;
+			urlState.q = to;
+			urlState.wp = [fromLat, fromLong, toLat, toLong];
 
 		});
 		
@@ -223,7 +226,7 @@ function propagateClick (e){
 
 	if (e.targetType === "pushpin"){
 		var item = canvasPhotos[$(self._htmlContent).attr('data-id')];
-		fullPicture(item.url_l);
+		fullPicture(item.url_l, item.id);
 		_gaq.push(['_trackEvent', 'Map', 'CirclePhotoClick', item.url_l]);
 	}
 }

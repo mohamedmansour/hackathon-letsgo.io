@@ -10,20 +10,20 @@ if(!Modernizr.svg) {
 	});
 }
 
-
-
-function fullPicture(image) {
+function fullPicture(image, photoID) {
 	$("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
 	$("#mapFrame").addClass("sidebar");
 
-	if (!isOpened) _gaq.push(['_trackEvent', 'Photo', 'OpenedFullPictureViewer', image]);
+	if (!isOpened) { _gaq.push(['_trackEvent', 'Photo', 'OpenedFullPictureViewer', image]); }
+	urlState.dpid = photoID;
 	isOpened = true;
 }
 
 function smallPicture() {
 	$("#bigPicture").removeClass("active");
 	$("#mapFrame").removeClass("sidebar");
-	if (isOpened) _gaq.push(['_trackEvent', 'Photo', 'ClosedFullPictureViewer']);
+	if (isOpened) { _gaq.push(['_trackEvent', 'Photo', 'ClosedFullPictureViewer']); }
+	urlState.dpid = null;
 	isOpened = false;
 }
 
@@ -111,7 +111,7 @@ $(document).on("click", "#welcomeScreen", function(e) {
 $(document).on("click", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
 	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
-	fullPicture(item.url_l);
+	fullPicture(item.url_l, item.id);
 });
 
 // $(document).on("click", "#bigPicture", function() {
@@ -122,7 +122,7 @@ $(document).on("click", ".mapImage", function() {
 $(document).on("touchstart", ".mapImage", function() {
 	var item = canvasPhotos[$(this).attr("data-id")];
 	//var src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_l.jpg";
-	fullPicture(item.url_l);
+	fullPicture(item.url_l, item.id);
 });
 
 
