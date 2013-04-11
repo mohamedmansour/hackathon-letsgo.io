@@ -46,7 +46,7 @@ nconf.env().file({ file: app.get("configFile") });
 var routes = require('./routes')
   , user = require('./routes/user')
   , auth = require('./routes/auth')
-  , api = require('./routes/api');;
+  , api = require('./routes/api');
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }

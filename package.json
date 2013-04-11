@@ -15,6 +15,7 @@
     "passport-facebook": "0.1.x",
     "node-uuid": "1.4.x",
     "async": "0.2.x",
-    "request": "2.16.x"
+    "request": "2.16.x",
+    "geoip-lite": "1.0.x"
   }
 }
