@@ -1,4 +1,4 @@
-var isOpened = false;
+var isOpened = false, urlState = {q:null,from:null,wp:[],pids:[],dpid:null};
 
 function fullPicture(image) {
     $("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
@@ -32,6 +32,22 @@ function smallPicture() {
 // }
 
 
+function getLink() {
+	var link = document.location.origin, parameterArray = [];
+	
+	$.each(urlState, function(parameter, value) {
+		if (value && value.toString().length > 0) {
+			parameterArray.push(parameter + "=" + encodeURIComponent(value)); // encodeURIComponent converts an array from [1,2,3] to "1,2,3" then encodes the commas.
+		}
+	});
+	
+	if (parameterArray.length > 0) { link += '?' + parameterArray.join('&'); }
+	
+	link = link.split('%20').join('+');
+	link = link.split('%2C').join(',');
+	
+	return link;
+}
 
 function logoSize() {
     var offsert = $("#bigSearchBar").offset();
