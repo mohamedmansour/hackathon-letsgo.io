@@ -43,6 +43,8 @@ function smallPicture() {
     
 // }
 
+function getUrl() {
+	"use strict";
 
 function getLink() {
 	var link = document.location.origin, parameterArray = [];
@@ -53,12 +55,34 @@ function getLink() {
 		}
 	});
 	
-	if (parameterArray.length > 0) { link += '?' + parameterArray.join('&'); }
+	if (parameterArray.length > 0) { link += '/?' + parameterArray.join('&'); }
 	
 	link = link.split('%20').join('+');
 	link = link.split('%2C').join(',');
 	
 	return link;
+}
+
+function getTitle() {
+	"use strict";
+	
+	var from = '', to = '', title = "LetsGo - Discover Scenic Highways and Byways";
+	
+	if (urlState.q && urlState.q.length) to = urlState.q;
+	if (urlState.from && urlState.from.length) from = urlState.from;
+		
+	if (from.length && to.length) title += " - " + from + " to " + to; 
+	else if (!from.length && to.length) title += " - " + to;
+	else if (from.length && !to.length) title += " - " + from;
+	else { /* add nothing to the title */ }
+	
+	return title;
+}
+
+function replaceWindowHistory() {
+	"use strict";
+	
+	window.history.replaceState(null, getTitle(), getUrl());
 }
 
 // Responsive Logo for the home screen splash.
