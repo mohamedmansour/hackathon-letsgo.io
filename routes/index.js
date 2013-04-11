@@ -1,28 +1,28 @@
 var app = require("../server.js").app
 	, conf = app.get("conf");
-/*
- * GET home page.
- */
 
-exports.index = function(req, res){
-  res.render('index', {user: req.user});
-};
+exports.attach = function(app) {
+	app.get('/', function(req, res) {
+  		res.render('index', {user: req.user});
+	});
 
+	app.get('/home', function(req, res) {
+  		res.render('home', {user: req.user});
+	});
 
-exports.tos = function(req, res){
-  res.render('tos');
-};
+	app.get('/privacy', function(req, res) {
+  		res.render('privacy', {user: req.user});
+	});
 
+	app.get('/support', function(req, res) {
+  		res.render('support', {user: req.user});
+	});
 
-exports.support = function(req, res){
-  res.render('support');
-};
+	app.get('/tos', function(req, res) {
+  		res.render('tos', {user: req.user});
+	});
 
-
-exports.privacy = function(req, res){
-  res.render('privacy');
-};
-
-exports.home = function(req, res){
-  res.render('home', {user: req.user });
+	app.get('/about', function(req, res) {
+  		res.render('about', {user: req.user});
+	});
 };

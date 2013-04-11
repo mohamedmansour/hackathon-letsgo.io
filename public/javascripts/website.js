@@ -86,18 +86,17 @@ function replaceWindowHistory() {
 
 // Responsive Logo for the home screen splash.
 function logoSize() {
-    var offsert = $("#bigSearchBar").offset();
-    $("#introLogo").css({height: (offsert.top/3)*2, paddingTop: offsert.top/6});
-    if($("#introLogo").hasClass("hidden")) {
-        $("#introLogo").removeClass("hidden");
-    }
+	var $searchBar = $("#bigSearchBar");
+	if ($searchBar.length) {
+	    var offsert = $searchBar.offset();
+	    $("#introLogo").css({height: (offsert.top/3)*2, paddingTop: offsert.top/6});
+	    if($("#introLogo").hasClass("hidden")) {
+	        $("#introLogo").removeClass("hidden");
+	    }
+	}
 }
 
 $(document).ready(function() {
-    logoSize();
-});
-
-$(window).resize(function() {
     logoSize();
 });
 
