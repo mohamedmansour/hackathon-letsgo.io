@@ -15,10 +15,10 @@ function getCoordinates(req) {
   var ret;
   var geo = geoip.lookup(req.ip);
   if (!geo) {
-    ret = { city: "San Francisco", ll: [122, 38] };
+    ret = { city: "San Francisco", ll: [122, 38], ip: req.ip };
   }
   else {
-    ret = { city: geo.city, ll: geo.ll };
+    ret = { city: geo.city, ll: geo.ll, ip: req.ip };
   }
   return JSON.stringify(ret);
 }
