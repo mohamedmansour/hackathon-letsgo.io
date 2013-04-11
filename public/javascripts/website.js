@@ -46,7 +46,6 @@ function smallPicture() {
 function getUrl() {
 	"use strict";
 
-function getLink() {
 	var link = document.location.origin, parameterArray = [];
 	
 	$.each(urlState, function(parameter, value) {
