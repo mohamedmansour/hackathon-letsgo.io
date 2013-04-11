@@ -62,7 +62,7 @@ function restoreStateFromUrl() {
 			toLong = urlState.wp[urlState.wp.length-1];
 			toLat = urlState.wp[urlState.wp.length-2];
 			map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations (new Microsoft.Maps.Location(toLat, toLong), new Microsoft.Maps.Location(fromLat, fromLong))});		
-			createDrivingRoute(toLat, fromLat, toLong, fromLong);
+			createDrivingRoute(fromLat, toLat, fromLong, toLong);
 			appActivate(); // Hide the start model screen
 		}
 		

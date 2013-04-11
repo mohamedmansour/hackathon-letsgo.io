@@ -1,7 +1,9 @@
 var map = new Microsoft.Maps.Map(document.getElementById('mapFrame'), {
 	credentials: PHD4.mapsKey,
 	showDashboard: false,
+	disableBirdseye: true,
 	enableSearchLogo: false,
+	showScalebar: false,
 	enableClickableLogo: false
 });
 
