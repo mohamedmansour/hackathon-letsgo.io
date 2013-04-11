@@ -86,8 +86,8 @@ function replaceWindowHistory() {
 
 // Responsive Logo for the home screen splash.
 function logoSize() {
-	var $searchBar = $("#bigSearchBar");
-	if ($searchBar.length) {
+    var $searchBar = $("#bigSearchBar");
+    if ($searchBar.length) {
 	    var offsert = $searchBar.offset();
 	    $("#introLogo").css({height: (offsert.top/3)*2, paddingTop: offsert.top/6});
 	    if($("#introLogo").hasClass("hidden")) {
@@ -97,6 +97,10 @@ function logoSize() {
 }
 
 $(document).ready(function() {
+    logoSize();
+});
+
+$(window).resize(function() {
     logoSize();
 });
 
