@@ -7,7 +7,26 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , nconf = require('nconf')
-  , passport = require('passport');
+  , passport = require('passport')
+  , geoip = require('geoip-lite');
+
+
+function getCoordinates(req) {
+  var ret;
+  var geo = geoip.lookup(req.ip);
+  if (!geo) {
+    ret = { city: "San Francisco", ll: [122, 38] };
+  }
+  else {
+    ret = { city: geo.city, ll: geo.ll };
+  }
+  return JSON.stringify(ret);
+}
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/');
+}
 
 app.configure(function(){
   app.set("configFile", "config.json");
@@ -23,6 +42,8 @@ app.configure(function(){
   app.use(express.session({ secret: 'keyboard cat' }));
 
   app.use(function (req, res, next) {
+    res.locals.user = req.user;
+    res.locals.location = getCoordinates(req);
     res.removeHeader("X-Powered-By");
     res.setHeader('X-Powered-By', 'node.js, expressJS, Bing Maps, Flickr API and probably some other cool stuff...oh and this is hosted on Windows Azure');
     next()
@@ -33,6 +54,7 @@ app.configure(function(){
 
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+
 });
 
 app.configure('development', function(){
@@ -47,11 +69,6 @@ var routes = require('./routes')
   , user = require('./routes/user')
   , auth = require('./routes/auth')
   , api = require('./routes/api');
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
-}
 
 app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
