@@ -704,6 +704,8 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 	border-radius: 50%;
 	border: 1px solid #333 !important;
 	cursor: pointer;
+	margin-left: -50%;
+	margin-top: -50%;
 }
 
 
@@ -721,8 +723,7 @@ footer {
 
 footer a {
 	color: #04c;
-}-
-
+}
 
 
 
