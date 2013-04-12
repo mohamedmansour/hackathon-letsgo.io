@@ -29,6 +29,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 app.configure(function(){
+  app.set("trust proxy", true);
   app.set("configFile", "config.json");
   app.set('conf', nconf);
   app.set('port', process.env.PORT || 3000);
