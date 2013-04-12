@@ -14,7 +14,7 @@ function fullPicture(image, photoID) {
 	$("#bigPicture").css({'background-image':'url('+image+')'}).addClass("active");
 	$("#mapFrame").addClass("sidebar");
 
-	if (!isOpened) { _gaq.push(['_trackEvent', 'Photo', 'OpenedFullPictureViewer', image]); }
+	if (!isOpened) { _gaq.push(['_trackEvent', 'Photo', 'OpenedFullPictureViewer', getUrl()]); }
 	urlState.dpid = photoID;
 	isOpened = true;
 }
@@ -22,7 +22,7 @@ function fullPicture(image, photoID) {
 function smallPicture() {
 	$("#bigPicture").removeClass("active");
 	$("#mapFrame").removeClass("sidebar");
-	if (isOpened) { _gaq.push(['_trackEvent', 'Photo', 'ClosedFullPictureViewer']); }
+	if (isOpened) { _gaq.push(['_trackEvent', 'Photo', 'ClosedFullPictureViewer', getUrl()]); }
 	urlState.dpid = null;
 	isOpened = false;
 }

@@ -95,7 +95,7 @@ function getPhotos() {
 		
 		//map.entities.clear();
 	
-		_gaq.push(['_trackEvent', 'Map', 'ReceivedPhotosInBoundingBox', minimumLongitude + ", " + minimumLatitude + ", " + maximumLongitude + ", " + maximumLatitude, pix.length]);
+		_gaq.push(['_trackEvent', 'Map', 'ReceivedPhotosInBoundingBox', getUrl(), pix.length]);
 		
 		var photosToDisplay = {};
 		$.each(photoSliced, function(i,photo) {
@@ -183,7 +183,7 @@ function fetchLocationAndLaunchQuery(){
 				urlState.q = to;
 				urlState.wp = [fromLat, fromLong, toLat, toLong];
 
-				_gaq.push(['_trackEvent', 'Map', 'DirectionSearch', '[' + from + '] to [' + to + ']']);
+				_gaq.push(['_trackEvent', 'Map', 'DirectionSearch', getUrl()]);
 			}};
 			
 			searchManager.geocode(geocodeRequestTo);
@@ -210,6 +210,6 @@ function propagateClick (e){
 	if (e.targetType === "pushpin"){
 		var item = canvasPhotos[$(self._htmlContent).attr('data-id')];
 		fullPicture(item.url_l, item.id);
-		_gaq.push(['_trackEvent', 'Map', 'CirclePhotoClick', item.url_l]);
+		_gaq.push(['_trackEvent', 'Map', 'CirclePhotoClick', getUrl()]);
 	}
 }
