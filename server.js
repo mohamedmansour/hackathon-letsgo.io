@@ -70,6 +70,7 @@ app.configure(function(){
 app.configure('development', function(){
   app.set("configFile", "config_development.json");
   app.use(express.errorHandler());
+  app.locals.pretty = true;
 });
 
 
