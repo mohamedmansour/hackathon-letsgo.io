@@ -1,4 +1,15 @@
 extends layout
 
+append styles
+  link(rel="stylesheet", href="/stylesheets/map.css")
+
+append scripts
+  script(src="//ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0")
+  script(src="/javascripts/getBestPlacesToVisit.js")
+  script(src="/javascripts/flickr.js")
+  script(src="/javascripts/website.js")
+  script(src="/javascripts/app.js")
+
 block content
-	h1 hey there
+  h1 hey there
+  #mapFrame

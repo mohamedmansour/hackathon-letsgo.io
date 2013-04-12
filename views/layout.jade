@@ -9,7 +9,6 @@ html(lang="en")
     meta(name="google-site-verification", content="5IR88rxZVzs03hKg6hfbxF-_CYvclDbOv-P6o3FWAFM")
     block styles
       link(rel="stylesheet", href="/stylesheets/style.css")
-      link(rel="stylesheet", href="/stylesheets/map.css")
     script
       if (window.location.hash == '#_=_') {
         window.location.hash = '';
@@ -19,11 +18,26 @@ html(lang="en")
   body
     block content
     footer
-      Powered by 
-        a(href="http://nodejs.org/) Node.js
-      hosted on
-        a(href="http://www.windowsazure.com") Windows Azure
-      with 
-        a(href="http://bing.com/maps/") Bing Maps
+      | Powered by 
+      a(href="http://nodejs.org/) Node.js 
+      | hosted on 
+      a(href="http://www.windowsazure.com") Windows Azure 
+      | with 
+      a(href="http://bing.com/maps/") Bing Maps 
+    script
+      var PHD4 = {
+        mapsKey: "!{ settings.mapsKey }",
+        currentLocation: !{ location }
+      };
     block scripts
       script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
+    script
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39924021-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
