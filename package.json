@@ -8,7 +8,7 @@
   "main": "./server.js",
   "dependencies": {
     "express": "3.1.x",
-    "ejs": "0.8.x",
+    "jade": "0.28.x",
     "nconf": "0.6.x",
     "azure": "0.7.x",
     "passport": "0.1.x",

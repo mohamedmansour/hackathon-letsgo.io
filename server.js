@@ -43,7 +43,7 @@ app.configure(function(){
   app.set('conf', nconf);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
+  app.set('view engine', 'jade');
   app.use(express.logger('dev'));
   app.use(express.compress());
   app.use(express.cookieParser());
