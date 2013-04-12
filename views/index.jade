@@ -11,5 +11,22 @@ append scripts
   script(src="/javascripts/app.js")
 
 block content
-  h1 hey there
-  #mapFrame
+  #welcomeScreen
+    img#introLogo.hidden(src="/images/LetsGoLogo.svg")
+    #bigSearchBar
+      h1#headerBar Where would you like to go?
+      #searchWrapper
+        input#searchFrom.location.bigSearchInput(type="text", autocomplete="off", spellcheck="false", placeholder="From:")
+        input#searchTo.location.bigSearchInput(type="text", autocomplete="off", spellcheck="false", placeholder="To:")
+        a#lookup.button(href="#") Look Here
+   #theApp.obscured
+      header
+        a(href='/')
+          img#headerLogo(src='/images/LetsGoLogo-sm.png')
+        input#searchFromHeader.location(type='text', autocomplete='off', spellcheck='false', name='location', placeholder='From:')
+        input#searchToHeader.location(type='text', autocomplete='off', spellcheck='false', name='location', placeholder='To:')
+        a#lookupHeader.button(href='#') Go!
+      #bigPicture
+        #pictureControls
+          img(src='/images/close.png', onclick='smallPicture()')
+      #mapFrame
