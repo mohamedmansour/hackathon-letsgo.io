@@ -1,3 +1,59 @@
 <% include header %>
-	<h1>About</h1>
+
+
+<article>
+
+<img src="/images/LetsGoLogo.svg" />
+
+<h1>phd4</h1>
+
+<p>Photo Hack Day 4 project, <a href="http://letsgo.io">http://letsgo.io</a> (2013)</p>
+
+<p>We used new technologies to build a great experience within 24 hours of hacking.
+We used many APIs and Data Sciences to find the most interesting beautiful photos
+to show you from any location to some destination.</p>
+
+<p>It renders the best possible directions and around those directions it places
+photo pins to showcase the beautiful interesting spots around that area. You
+can alter your trip so you can visit that one place.</p>
+
+<h1>Team Members</h1>
+
+<ul>
+<li>Jeremy Benaim <a href="http://github.com/jeremybenaim">@jeremybenaim</a>
+</li>
+<li>Joey Hiller <a href="http://github.com/jthiller">@jthiller</a>
+</li>
+<li>Justin Ormont <a href="http://github.com/justinormont">@justinormont</a>
+</li>
+<li>Ray S <a href="http://github.com/ray-s">@ray-s</a>
+</li>
+<li>Mohamed Mansour <a href="http://github.com/mohamedmansour">@mohamedmansour</a>
+</li>
+</ul>
+
+<h1>Technologies Used</h1>
+
+<ul>
+<li>Node.js (express, passport, request, nconf, ejs, azure)</li>
+<li>Windows Azure (Cloud Storage and Cloud Services)</li>
+<li>Bing Maps API (for waypoints, directions, pins, geolocation lookup)</li>
+<li>Flickr API (For images and their locations)</li>
+<li>HTML5 (transitions, animations, media queries)</li>
+</ul>
+
+<h1>How to Install</h1>
+
+<ol>
+<li>Make sure you clone this repo</li>
+<li>Copy config.json.defaults to config_development.json and fill in your API keys</li>
+<li>Run "npm install" from the root project directory</li>
+<li>Then just run node "npm start" from the root</li>
+<li>Visit http://localhost:3000 to allow OAuth with Facebook to work, just update your hosts to point letsgo.io to localhost and just visit <a href="http://letsgo.io:3000">http://letsgo.io:3000</a>
+</li>
+</ol>
+
+<p>Please submit pull requests so we can make this project more awesome :)</p>
+
+</article>
 <% include footer %>
