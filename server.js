@@ -15,10 +15,10 @@ function getCoordinates(req) {
   var ret;
   var geo = geoip.lookup(req.ip);
   if (!geo) {
-    ret = { city: "San Francisco", ll: [122, 38], ip: req.ip };
+    ret = { city: "San Francisco", ll: [122, 38], ip: undefined };
   }
   else {
-    ret = { city: geo.city, ll: geo.ll, ip: req.ip };
+    ret = { city: geo.city, ll: geo.ll, ip: undefined };
   }
   return JSON.stringify(ret);
 }
@@ -42,6 +42,7 @@ app.configure(function(){
   app.use(express.session({ secret: 'keyboard cat' }));
 
   app.use(function (req, res, next) {
+    res.locals.ip = req.ip;
     res.locals.user = req.user;
     res.locals.location = getCoordinates(req);
     res.removeHeader("X-Powered-By");
