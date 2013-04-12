@@ -22,7 +22,8 @@ Microsoft.Maps.loadModule('Microsoft.Maps.Search', function(){
 	searchManager = new Microsoft.Maps.Search.SearchManager(map);
 });
 
-map.setView({ zoom: 10, center: new Microsoft.Maps.Location(37.47,-122.13)});
+var currentLocation = PHD4.currentLocation;
+map.setView({ zoom: 11, center: new Microsoft.Maps.Location(currentLocation.ll[0], currentLocation.ll[1])});
 map.entities.clear();
 
 function renderPhoto(item) {

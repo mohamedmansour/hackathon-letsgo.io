@@ -24,7 +24,7 @@ function getCoordinates(req) {
   geo = geoip.lookup(ip);
 
   if (!geo) {
-    ret = { city: "San Francisco", ll: [122, 38], ip: ip };
+    ret = { city: "San Francisco", ll: [37.47,-122.13], ip: ip };
   }
   else {
     ret = { city: geo.city, ll: geo.ll, ip: ip };
