@@ -12,13 +12,22 @@ var express = require('express')
 
 
 function getCoordinates(req) {
-  var ret;
-  var geo = geoip.lookup(req.ip);
+  var ret,
+      geo,
+      ip = req.ip,
+      portIndex = ip.indexOf(":");
+  
+  if (portIndex != -1) {
+    ip = ip.substring(0, portIndex);
+  }
+  
+  geo = geoip.lookup(ip);
+
   if (!geo) {
-    ret = { city: "San Francisco", ll: [122, 38], ip: undefined };
+    ret = { city: "San Francisco", ll: [122, 38], ip: ip };
   }
   else {
-    ret = { city: geo.city, ll: geo.ll, ip: undefined };
+    ret = { city: geo.city, ll: geo.ll, ip: ip };
   }
   return JSON.stringify(ret);
 }
@@ -43,7 +52,6 @@ app.configure(function(){
   app.use(express.session({ secret: 'keyboard cat' }));
 
   app.use(function (req, res, next) {
-    res.locals.ip = req.ip;
     res.locals.user = req.user;
     res.locals.location = getCoordinates(req);
     res.removeHeader("X-Powered-By");
