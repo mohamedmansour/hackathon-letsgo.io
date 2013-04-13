@@ -79,12 +79,14 @@ nconf.env().file({ file: app.get("configFile") });
 var routes = require('./routes')
   , user = require('./routes/user')
   , auth = require('./routes/auth')
+  , screenshot = require('./routes/screenshot')
   , api = require('./routes/api');
 
 app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
 routes.attach(app);
 auth.attach(app);
+screenshot.attach(app);
 api.attach(app);
 
 http.createServer(app).listen(app.get('port'), function(){
