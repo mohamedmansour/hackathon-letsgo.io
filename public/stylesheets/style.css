@@ -723,6 +723,12 @@ footer a {
 }
 
 
+#wrapper {
+	background-color: #fff;
+	padding: 10px;
+	margin: 10px auto;
+	width: 720px;
+}
 
 @media (max-width: 800px) {
 	input#searchToHeader, input#searchFromHeader {
@@ -742,6 +748,10 @@ footer a {
 		width: 12em;
 		padding: 0 10px;
 		font-size: 1.5em;
+	}
+	#wrapper {
+		width: auto;
+		margin: 10px;
 	}
 }
 

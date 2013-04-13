@@ -1,0 +1,19 @@
+#wrapper a {
+	color: #04c;
+}
+
+#introLogo {
+	padding-top:1em;
+}
+
+footer {
+	position: static;
+	background-color: transparent;
+	text-align: center;
+	text-shadow: none;
+	color: #eee;
+}
+
+footer a {
+	color: #ccc;
+}

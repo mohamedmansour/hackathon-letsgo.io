@@ -1,8 +1,4 @@
-extends layout
+extends page
 
-append styles
-  link(rel="stylesheet", href="/stylesheets/about.css")
-
-block content
-  h1 About
+block page
   include ../README.md

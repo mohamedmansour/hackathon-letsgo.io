@@ -1,4 +1,4 @@
-phd4
+About
 ====
 
 Photo Hack Day 4 project, http://letsgo.io (2013)
