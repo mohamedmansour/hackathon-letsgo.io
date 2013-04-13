@@ -455,8 +455,6 @@ body {
 	right: 0;
 	left: 0%;
 	z-index: 31;
-	/*height: 19em;*/
-	padding-bottom: 4em;
 	background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -474,15 +472,15 @@ h1#headerBar {
 	text-align: center;
 }
 
-#searchWrapper .button {
-	padding: 1.4em !important;
-	margin: 1em 0.2em !important;
-	top: -0.15em !important;
-	font-size: 1.5em !important;
+#lookup {
+	padding: 1.4em;
+	margin: 1em 0.2em;
+	top: -0.15em;
+	font-size: 1.5em;
 }
 
-#searchWrapper .button.second {
-	margin-left: 0.5em !important;
+#lookup.second {
+	margin-left: 0.5em;
 }
 
 .bigSearchInput {
@@ -731,13 +729,19 @@ footer a {
 		width: 15em;
 	}
 	h1#headerBar {
-		font-size:4em;
+		font-size:3.5em;
 	}
 	header.active {
 		height: auto;
 	} 
-	#searchWrapper .button {
+	#lookup {
 		display:block;
+		padding: 1em;
+	}
+	.bigSearchInput {
+		width: 12em;
+		padding: 0 10px;
+		font-size: 1.5em;
 	}
 }
 
@@ -758,10 +762,10 @@ footer a {
 	}
 	#searchWrapper input {
 		display: block;
-		margin: 10px auto;
 		padding: 10px;
 		height: auto;
-		width: auto;
+		width: 80%;
+		margin: 10px auto;
 	}
 	.mapImage img {
 		width: 50px;
