@@ -6,19 +6,29 @@ exports.attach = function(app) {
 	app.get('/screenshot', function(req, resp) {
 		"use strict";
 		
-		var query, webshot, url, options, urlPartsArray = [], queryParameters, key;
+		var query, webshot, url, options, urlPartsArray, queryParameters, key;
 		
 		webshot = require('webshot');
 
+
+		// Other options here: https://github.com/brenden/node-webshot
 		options = {
-			screenSize: { width: 1024, height: 768 }, 
-			shotSize: { width: 1024, height: 768 },
-			userAgent: 'webshot on node.js'
+			screenSize: { width: 1500, height: 900 }, 
+			shotSize: { width: 1500, height: 900 },
+			userAgent: 'webshot on node.js'//,
+			//renderDelay: 500,
+			//script: function() {
+			//	setTimeout(appDeactivate,1000);
+			//}
 		}
 		
 		queryParameters = req.query
 
-		url = 'http://localhost:' + app.get('port') + '/';
+		url = 'http://' + (req.headers.host || 'localhost' + ':' + app.get('port')) + '/';
+		urlPartsArray = [
+			"nf=1", // Don't fade in circle photos
+			"ScreenShot=true" // Used in Google Analytics to know this query is for a screenshot
+		];
 		
 		// Copy all query parameters from the current url, to the url we will grab
 		for (key in queryParameters) { urlPartsArray.push(key + '=' + queryParameters[key]); }
