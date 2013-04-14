@@ -604,7 +604,7 @@ header {
 	overflow: hidden;
 	height: 5em;
 	padding-top: .05em;
-	background-color: #333;
+	background-color: rgba(51, 51, 51, 0.94);
 	-webkit-transition: top 2s ease;
 	-moz-transition: top 2s ease;
 	-ms-transition: top 2s ease;
@@ -700,7 +700,7 @@ input#searchToHeader:-ms-input-placeholder, input#searchFromHeader:-ms-input-pla
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
-	border: 1px solid #333 !important;
+	box-shadow: 0 0 0 1px rgba(0,0,0,1), 5px 5px 10px rgba(0,0,0,0.3);
 	cursor: pointer;
 	margin: 0;
 }

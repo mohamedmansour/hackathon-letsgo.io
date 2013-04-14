@@ -5,24 +5,22 @@ var app = require("../server.js").app
 exports.attach = function(app) {
 	app.get('/screenshot', function(req, resp) {
 		"use strict";
-		
 		var query, webshot, url, options, urlPartsArray, queryParameters, key;
 		
 		webshot = require('webshot');
 
-
 		// Other options here: https://github.com/brenden/node-webshot
 		options = {
-			screenSize: { width: 1500, height: 900 }, 
-			shotSize: { width: 1500, height: 900 },
-			userAgent: 'webshot on node.js'//,
-			//renderDelay: 500,
-			//script: function() {
-			//	setTimeout(appDeactivate,1000);
-			//}
-		}
+			screenSize: { width: 1500, height: 900 }
+			, shotSize: { width: 1500, height: 900 }
+			, userAgent: 'webshot on node.js'//
+			, renderDelay: 500
+			, script: function() {
+				//exec("var appActivateReal = appActivate; appActivate = function() { appActivate(); }; _gaq.push(['_trackEvent', 'App', 'Screenshot', getUrl()]);");
+			}
+		};
 		
-		queryParameters = req.query
+		queryParameters = req.query;
 
 		url = 'http://' + (req.headers.host || 'localhost' + ':' + app.get('port')) + '/';
 		urlPartsArray = [
