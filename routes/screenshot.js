@@ -27,7 +27,7 @@ exports.attach = function(app) {
 			screenSize: { width: 1500, height: 900 }
 			, shotSize: { width: 1500, height: 900 }
 			, userAgent: 'webshot on node.js'//
-			//, renderDelay: 500
+			//, renderDelay: 1000
 			, script: dontShowToFromOverlay
 		};
 		

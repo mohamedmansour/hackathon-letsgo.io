@@ -173,12 +173,19 @@ function resizeImagesToNotOverlap() {
 	$.each(photosCurrentlyOnMap, function(picID) {
 		var picDOM = document.getElementById(picID), requiredScale, normalWidth;
 		
+		var dontShrinkUntil = 0.5; // If it's over x% overlap, allow the photo to be shrunk.
+		var minShrinkSize = 0.5; // Minimum relative scale of shrunken photo 
+		var shrinkProportion = 1.25; // Higher number leads to larger photo. 1.0 makes photos just touch. >1.0 creates an overlap. <1.0 creates extraneous space.
+		
 		normalWidth = (urlState.lp?150:75);
 		
-		if (boundingBoxesCache[picID] && normalWidth > minClosestOtherPics[picID]) {
-			requiredScale = minClosestOtherPics[picID] / normalWidth ;
-			requiredScale = Math.max(requiredScale, 0.5);
-			picDOM.parentNode.style.webkitTransform = "scale(" + requiredScale + "," + requiredScale + ")"
+		if (boundingBoxesCache[picID] && normalWidth*(1-dontShrinkUntil) > minClosestOtherPics[picID]) {
+			requiredScale = minClosestOtherPics[picID] / normalWidth * shrinkProportion;
+			requiredScale = Math.min(requiredScale, 1.0);
+			requiredScale = Math.max(requiredScale, minShrinkSize);
+			picDOM.parentNode.style.webkitTransform = "scale(" + requiredScale + "," + requiredScale + ")";
+			picDOM.parentNode.style.transform = "scale(" + requiredScale + "," + requiredScale + ")";
+			picDOM.parentNode.style.msTransform = "scale(" + requiredScale + "," + requiredScale + ")";
 		}
 	});
 }
