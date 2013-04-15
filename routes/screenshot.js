@@ -9,15 +9,26 @@ exports.attach = function(app) {
 		
 		webshot = require('webshot');
 
+		// This function will be executed in the context of the page being screenshot
+		var showToFromOverlay = function() {
+			document.getElementById('welcomeScreen').style.display = 'block'; 
+			document.getElementsByTagName('header')[0].style.visibility = 'hidden';
+			
+			_gaq.push(['_trackEvent', 'App', 'Screenshot', getUrl()]);
+		}
+
+		// This function will be executed in the context of the page being screenshot
+		var dontShowToFromOverlay = function() {
+			_gaq.push(['_trackEvent', 'App', 'Screenshot', getUrl()]);
+		}	
+
 		// Other options here: https://github.com/brenden/node-webshot
 		options = {
 			screenSize: { width: 1500, height: 900 }
 			, shotSize: { width: 1500, height: 900 }
 			, userAgent: 'webshot on node.js'//
-			, renderDelay: 500
-			, script: function() {
-				//exec("var appActivateReal = appActivate; appActivate = function() { appActivate(); }; _gaq.push(['_trackEvent', 'App', 'Screenshot', getUrl()]);");
-			}
+			//, renderDelay: 500
+			, script: dontShowToFromOverlay
 		};
 		
 		queryParameters = req.query;
@@ -33,6 +44,8 @@ exports.attach = function(app) {
 		
 		// If there are parameters, join & append them
 		if (urlPartsArray.length) { url += "?" + urlPartsArray.join('&'); }
+		
+		if (urlPartsArray.to && urlPartsArray.to.length && urlPartsArray.q && urlPartsArray.q.length) { options.script = showToFromOverlay; }
 		
 		resp.type("image/png");
 		webshot(url, options, function(err, renderStream) {

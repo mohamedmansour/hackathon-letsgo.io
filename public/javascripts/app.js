@@ -31,7 +31,7 @@ function initAfterFirstMapLoad() {
 		firstRun = false; 
 		restoreStateFromUrl();
 		
-		if (urlState.nf) {
+		if (!urlState.nf) {
 			var styleDOM = document.createElement('style');
 			styleDOM.innerHTML = '.fadeIN { opacity: 0; margin-top: 25px; font-size: 21px; text-align: center; -webkit-transition: opacity 0.5s ease-in; -moz-transition: opacity 0.5s ease-in; -o-transition: opacity 0.5s ease-in; -ms-transition: opacity 0.5s ease-in; transition: opacity 0.5s ease-in;} .loaded { opacity: 1;}';
 			document.body.appendChild(styleDOM);
@@ -63,7 +63,7 @@ function renderPhoto(item) {
 		imgDOM.onload = function() {
 			if (document.getElementById(item.id) && !document.getElementById(item.id).childNodes.length) {
 				document.getElementById(item.id).appendChild(imgDOM);
-				setTimeout(function(){imgDOM.classList.add('loaded');});
+				setTimeout(function(){imgDOM.classList.add('loaded'); resizeImagesToNotOverlapDelayed();});
 			}
 		};
 	});
@@ -133,9 +133,72 @@ function getPhotos() {
 			
 			if (!photosCurrentlyOnMap[pic.id] && pic.url_l) renderPhoto(pic);
 		});
+		
+		// Clear the cache of bounding boxes
+		boundingBoxesCache = {};
+		
+		// Resize image to not overlap
+		resizeImagesToNotOverlap();
 	});
 }
 
+var boundingBoxesCache = {};
+
+var resizeImagesToNotOverlapTimer;
+function resizeImagesToNotOverlapDelayed() {
+	clearTimeout(resizeImagesToNotOverlapTimer);
+	resizeImagesToNotOverlapTimer = setTimeout(resizeImagesToNotOverlap, 500);
+}
+
+function resizeImagesToNotOverlap() {
+	"use strict";
+	
+	boundingBoxesCache = {};
+	
+	var minClosestOtherPics = {}, pixelDistance;
+	
+	$.each(photosCurrentlyOnMap, function(picIdA) {
+		minClosestOtherPics[picIdA] = 10000;
+		
+		$.each(photosCurrentlyOnMap, function(picIdB) {
+			if (picIdA*1 !== picIdB*1) { 
+				pixelDistance = pixelDistanceBetweenPhotos(picIdA, picIdB);
+				
+				minClosestOtherPics[picIdA] = Math.min(minClosestOtherPics[picIdA],pixelDistance);
+				minClosestOtherPics[picIdB] = Math.min(minClosestOtherPics[picIdB],pixelDistance);
+			}
+		})
+	})
+	
+	$.each(photosCurrentlyOnMap, function(picID) {
+		var picDOM = document.getElementById(picID), requiredScale, normalWidth;
+		
+		normalWidth = (urlState.lp?150:75);
+		
+		if (boundingBoxesCache[picID] && normalWidth > minClosestOtherPics[picID]) {
+			requiredScale = minClosestOtherPics[picID] / normalWidth ;
+			requiredScale = Math.max(requiredScale, 0.5);
+			picDOM.parentNode.style.webkitTransform = "scale(" + requiredScale + "," + requiredScale + ")"
+		}
+	});
+}
+
+function pixelDistanceBetweenPhotos(picIdA, picIdB) {
+	"use strict";
+	
+	var boundingBoxA = boundingBoxesCache[picIdA], boundingBoxB = boundingBoxesCache[picIdB], domA, domB;
+	
+	if (!boundingBoxA && document.getElementById(picIdA)) { domA = document.getElementById(picIdA); boundingBoxA = domA.getBoundingClientRect(); boundingBoxesCache[picIdA] = boundingBoxA; }
+	if (!boundingBoxB && document.getElementById(picIdB)) { domB = document.getElementById(picIdB); boundingBoxB = domB.getBoundingClientRect(); boundingBoxesCache[picIdB] = boundingBoxB; }
+	
+	// Assume OK if photo hasn't been rendered by the map.
+	if (!boundingBoxA || !boundingBoxB) return 1000;
+	
+	// Shortcut the processing. Don't need real distance if they are > 150px apart.
+	if (boundingBoxA.left - boundingBoxB.left > 150 || boundingBoxB.left - boundingBoxA.left > 150 || boundingBoxA.top - boundingBoxB.top > 150 || boundingBoxB.top - boundingBoxA.top > 150) return 1000;
+	
+	return Math.sqrt(Math.pow((boundingBoxA.left + boundingBoxA.right)/2 - (boundingBoxB.left + boundingBoxB.right)/2,2) + Math.pow((boundingBoxA.top + boundingBoxA.bottom)/2 - (boundingBoxB.top + boundingBoxB.bottom)/2,2));
+}
 
 
 function createDrivingRoute(fromLat, toLat, fromLong, toLong, autoUpdateMapView) {
