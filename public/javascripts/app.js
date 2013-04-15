@@ -153,9 +153,13 @@ function resizeImagesToNotOverlapDelayed() {
 function resizeImagesToNotOverlap() {
 	"use strict";
 	
-	boundingBoxesCache = {};
+	var minClosestOtherPics, pixelDistance, giveUpOnTooClosePhotosUnderNpx;
 	
-	var minClosestOtherPics = {}, pixelDistance;
+	giveUpOnTooClosePhotosUnderNpx = 5;
+	minClosestOtherPics = {};
+	
+	// Reset the bounding box cache
+	boundingBoxesCache = {};
 	
 	$.each(photosCurrentlyOnMap, function(picIdA) {
 		minClosestOtherPics[picIdA] = 10000;
@@ -164,8 +168,10 @@ function resizeImagesToNotOverlap() {
 			if (picIdA*1 !== picIdB*1) { 
 				pixelDistance = pixelDistanceBetweenPhotos(picIdA, picIdB);
 				
-				minClosestOtherPics[picIdA] = Math.min(minClosestOtherPics[picIdA],pixelDistance);
-				minClosestOtherPics[picIdB] = Math.min(minClosestOtherPics[picIdB],pixelDistance);
+				if (pixelDistance > giveUpOnTooClosePhotosUnderNpx) {
+					minClosestOtherPics[picIdA] = Math.min(minClosestOtherPics[picIdA],pixelDistance);
+					minClosestOtherPics[picIdB] = Math.min(minClosestOtherPics[picIdB],pixelDistance);
+				}
 			}
 		})
 	})
