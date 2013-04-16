@@ -193,6 +193,12 @@ function resizeImagesToNotOverlap() {
 			picDOM.parentNode.style.transform = "scale(" + requiredScale + "," + requiredScale + ")";
 			picDOM.parentNode.style.msTransform = "scale(" + requiredScale + "," + requiredScale + ")";
 		}
+		else { // Set to be normal sized
+			requiredScale = 1;
+			picDOM.parentNode.style.webkitTransform = "scale(" + requiredScale + "," + requiredScale + ")";
+			picDOM.parentNode.style.transform = "scale(" + requiredScale + "," + requiredScale + ")";
+			picDOM.parentNode.style.msTransform = "scale(" + requiredScale + "," + requiredScale + ")";
+		}
 	});
 }
 
