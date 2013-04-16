@@ -46,6 +46,8 @@ function restoreStateFromUrl() {
 	query = document.location.search;
 	urlState = {q:null,from:null,wp:[],pids:[],dpid:null,vp:[],lp:null,nf:null}
 	
+	if (document.documentElement.clientWidth * document.documentElement.clientHeight > 600000) { urlState.lp = true; }
+	
 	if (query && query.length) {
 		query = query.slice(1); // Remove the '?' at the start.
 		$.each(query.split('&'), function(i,queryParameter) {
