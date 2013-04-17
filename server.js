@@ -78,14 +78,14 @@ nconf.env().file({ file: app.get("configFile") });
 
 var routes = require('./routes')
   , user = require('./routes/user')
-  , auth = require('./routes/auth')
-  , screenshot = require('./routes/screenshot');
+  , auth = require('./routes/auth');
+  // , screenshot = require('./routes/screenshot');
 
 app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
 routes.attach(app);
 auth.attach(app);
-screenshot.attach(app);
+// screenshot.attach(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
