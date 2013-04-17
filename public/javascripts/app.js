@@ -28,9 +28,9 @@ map.entities.clear();
 
 function initAfterFirstMapLoad() {
 	if (firstRun) {
-		firstRun = false; 
+		firstRun = false;
 		restoreStateFromUrl();
-		
+
 		if (!urlState.nf) {
 			var styleDOM = document.createElement('style');
 			styleDOM.innerHTML = '.fadeIN { opacity: 0; margin-top: 25px; font-size: 21px; text-align: center; -webkit-transition: opacity 0.5s ease-in; -moz-transition: opacity 0.5s ease-in; -o-transition: opacity 0.5s ease-in; -ms-transition: opacity 0.5s ease-in; transition: opacity 0.5s ease-in;} .loaded { opacity: 1;}';
@@ -41,7 +41,7 @@ function initAfterFirstMapLoad() {
 
 function renderPhoto(item) {
 	canvasPhotos[item.id] = item;
-	
+
 	var pushpin = new Microsoft.Maps.Pushpin(
 		new Microsoft.Maps.Location(item.latitude, item.longitude), {
 			width: (urlState.lp?150:75),
@@ -49,9 +49,9 @@ function renderPhoto(item) {
 			htmlContent: ("<div class='mapImage " + (urlState.lp?"mapImageLarge":'') + "' data-id='" + item.id + "' id='" + item.id + "'></div>")
 		}
 	);
-	
+
 	photosCurrentlyOnMap[item.id] = pushpin;
-	
+
 	map.entities.push(pushpin);
 
 	setTimeout(function() {
@@ -77,7 +77,7 @@ function appActivate() {
 
 function appDeactivate() {
 	"use strict";
-	
+
 	$("header").removeClass("active");
 	$("#welcomeScreen").fadeIn(800);
 	$("#theApp").addClass("obscured");
@@ -89,54 +89,55 @@ var photoSetOnDisplay = 0;
 function getPhotos() {
 	// map.getBounds(); 
 	var bounds = map.getBounds();
-	console.log(bounds);
+
+	// console.log(bounds);
+
 	var halfWidth = bounds.width / 2;
 	var halfHeight = bounds.height / 2;
 	var minimumLongitude = bounds.center.longitude - halfWidth,
 		minimumLatitude = bounds.center.latitude - halfHeight,
 		maximumLongitude = bounds.center.longitude + halfWidth,
 		maximumLatitude = bounds.center.latitude + halfHeight;
+
 	var thisPhotoSet = photoSetRequested+1;
-	
+
 	photoSetRequested += 1;
-	
+
 	//getBoundingBoxPhotos(fromLong, fromLat, toLong, toLat, function(pix){
 	getBoundingBoxPhotos(minimumLongitude, minimumLatitude, maximumLongitude, maximumLatitude, function(pix){
 		var photoSliced = pix.slice(0,30);
 		//canvasPhotos = {};
-		
+
 		if (!photoSliced || !photoSliced.length) return;
-		
+
 		if (thisPhotoSet < photoSetOnDisplay) { console.log("Photos returned out of order. Currently displaying #" + photoSetOnDisplay + ", incomming is #" + thisPhotoSet); return; }
-		
+
 		photoSetOnDisplay = thisPhotoSet;
-		
+
 		//map.entities.clear();
-	
 		_gaq.push(['_trackEvent', 'Map', 'ReceivedPhotosInBoundingBox', getUrl(), pix.length]);
-		
+
 		var photosToDisplay = {};
 		$.each(photoSliced, function(i,photo) {
 			photosToDisplay[photo.id] = 1;
 		});
-		
+
 		$.each(photosCurrentlyOnMap, function(photoid, pushpin) {
 			if (!photosToDisplay[photoid]) {
 				map.entities.remove(pushpin);
 				delete photosCurrentlyOnMap[photoid];
-				console.log("Removing id=" + photoid);
+				// console.log("Removing id=" + photoid);
 			}
 		});
-		
+
 		photoSliced.forEach(function(pic) {
 			"use strict";
-			
 			if (!photosCurrentlyOnMap[pic.id] && pic.url_l) renderPhoto(pic);
 		});
-		
+
 		// Clear the cache of bounding boxes
 		boundingBoxesCache = {};
-		
+
 		// Resize image to not overlap
 		resizeImagesToNotOverlap();
 	});
@@ -177,11 +178,13 @@ function resizeImagesToNotOverlap() {
 	})
 	
 	$.each(photosCurrentlyOnMap, function(picID) {
-		var picDOM = document.getElementById(picID), requiredScale, normalWidth;
+		var picDOM = document.getElementById(picID),
+			requiredScale,
+			normalWidth;
 		
-		var dontShrinkUntil = 0.5; // If it's over x% overlap, allow the photo to be shrunk.
-		var minShrinkSize = 0.5; // Minimum relative scale of shrunken photo 
-		var shrinkProportion = 1.25; // Higher number leads to larger photo. 1.0 makes photos just touch. >1.0 creates an overlap. <1.0 creates extraneous space.
+		var dontShrinkUntil = 0.5, // If it's over x% overlap, allow the photo to be shrunk.
+			minShrinkSize = 0.5, // Minimum relative scale of shrunken photo 
+			shrinkProportion = 1.25; // Higher number leads to larger photo. 1.0 makes photos just touch. >1.0 creates an overlap. <1.0 creates extraneous space.
 		
 		normalWidth = (urlState.lp?150:75);
 		
@@ -195,9 +198,11 @@ function resizeImagesToNotOverlap() {
 		}
 		else { // Set to be normal sized
 			requiredScale = 1;
-			picDOM.parentNode.style.webkitTransform = "scale(" + requiredScale + "," + requiredScale + ")";
-			picDOM.parentNode.style.transform = "scale(" + requiredScale + "," + requiredScale + ")";
-			picDOM.parentNode.style.msTransform = "scale(" + requiredScale + "," + requiredScale + ")";
+			if(picDOM){
+				picDOM.parentNode.style.webkitTransform = "scale(" + requiredScale + "," + requiredScale + ")";
+				picDOM.parentNode.style.transform = "scale(" + requiredScale + "," + requiredScale + ")";
+				picDOM.parentNode.style.msTransform = "scale(" + requiredScale + "," + requiredScale + ")";
+			}
 		}
 	});
 }
@@ -313,7 +318,7 @@ function propagateClick (e){
 	var self = e.target;
 	if (e.targetType === "pushpin"){
 		var item = canvasPhotos[$(self._htmlContent).attr('data-id')];
-		fullPicture(item.url_l, item.id);
+		fullPicture(item);
 		_gaq.push(['_trackEvent', 'Map', 'CirclePhotoClick', getUrl()]);
 	}
 }

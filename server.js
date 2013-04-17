@@ -56,7 +56,7 @@ app.configure(function(){
     res.locals.location = getCoordinates(req);
     res.removeHeader("X-Powered-By");
     res.setHeader('X-Powered-By', 'node.js, expressJS, Bing Maps, Flickr API and probably some other cool stuff...oh and this is hosted on Windows Azure');
-    next()
+    next();
   });
 
   app.use(passport.initialize());
@@ -79,15 +79,13 @@ nconf.env().file({ file: app.get("configFile") });
 var routes = require('./routes')
   , user = require('./routes/user')
   , auth = require('./routes/auth')
-  , screenshot = require('./routes/screenshot')
-  , api = require('./routes/api');
+  , screenshot = require('./routes/screenshot');
 
 app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
 routes.attach(app);
 auth.attach(app);
 screenshot.attach(app);
-api.attach(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
