@@ -8,6 +8,8 @@ function getBestPlacesToVisit(topPhotos, callback) {
 	
 	var photoSortedByDistance;
 	
+	topPhotos = topPhotos.filter(function(photo){ return (1*photo.latitude !== 0 && 1*photo.longitude !== 0); });
+	
 	$.each(topPhotos, function(i,photo) {
 		photo.boringness = (i + 1)/topPhotos.length;
 		if (typeof photo.longitude !== "number" || typeof photo.latitude !== "number") { 
