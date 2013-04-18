@@ -8,7 +8,8 @@ var express = require('express')
   , path = require('path')
   , nconf = require('nconf')
   , passport = require('passport')
-  , geoip = require('geoip-lite');
+  , geoip = require('geoip-lite')
+  , routes = require('./routes');
 
 
 function getCoordinates(req) {
@@ -74,19 +75,14 @@ app.configure('development', function(){
 });
 
 
+// Initialize nconf.
 nconf.env().file({ file: app.get("configFile") });
-
-var routes = require('./routes')
-  , user = require('./routes/user')
-  , auth = require('./routes/auth');
-  // , screenshot = require('./routes/screenshot');
-
 app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
+// Attach all the routes.
 routes.attach(app);
-auth.attach(app);
-// screenshot.attach(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+// Start the server.
+http.createServer(app).listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
 });

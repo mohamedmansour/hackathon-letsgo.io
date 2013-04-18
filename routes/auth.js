@@ -1,8 +1,8 @@
 var app = require("../server.js").app
-	, conf = app.get("conf")
-    , azure = require('azure')
-    , async = require('async')
-    , User = require('../models/user.js');
+  , conf = app.get("conf")
+  , azure = require('azure')
+  , async = require('async')
+  , User = require('../models/user.js');
 
 
 var user = new User(
