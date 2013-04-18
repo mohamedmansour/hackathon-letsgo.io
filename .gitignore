@@ -8,12 +8,18 @@ lib-cov
 *.pid
 *.gz
 
+Thumbs.db
+
 pids
 logs
 results
+
+build/
 
 npm-debug.log
 node_modules
 
 config.json
 config_development.json
+
+letsgo.io.*
