@@ -1,17 +1,6 @@
 'use strict';
 
 
-/* packages.json
-  "devDependencies": {
-    "grunt": "0.4.1",
-    "grunt-contrib-uglify": "0.2.0",
-    "grunt-contrib-cssmin": "0.6.0",
-    "grunt-contrib-concat": "0.2.0",
-    "grunt-contrib-clean": "0.4.1",
-    "grunt-contrib-copy": "0.4.1"
-  }
-*/  
-
 module.exports = function(grunt) {
 
   grunt.initConfig({
