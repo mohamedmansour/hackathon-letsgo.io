@@ -9,8 +9,7 @@ var express = require('express')
   , nconf = require('nconf')
   , passport = require('passport')
   , geoip = require('geoip-lite')
-  , routes = require('./routes');
-
+  , routes = require('./routes'); 
 
 function getCoordinates(req) {
   var ret,
@@ -38,13 +37,13 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/');
 }
 
-app.configure(function(){
-  app.set("trust proxy", true);
-  app.set("configFile", "config.json");
+app.configure(function() {
+  app.set("trust proxy", true); // Azure runs behind a proxy
   app.set('conf', nconf);
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+
   app.use(express.logger('dev'));
   app.use(express.compress());
   app.use(express.cookieParser());
@@ -55,34 +54,26 @@ app.configure(function(){
   app.use(function (req, res, next) {
     res.locals.user = req.user;
     res.locals.location = getCoordinates(req);
-    res.removeHeader("X-Powered-By");
-    res.setHeader('X-Powered-By', 'node.js, expressJS, Bing Maps, Flickr API and probably some other cool stuff...oh and this is hosted on Windows Azure');
+    res.locals.mapsKey = nconf.get("BING_MAPS_API");
     next();
   });
 
   app.use(passport.initialize());
   app.use(passport.session());
-
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
-
 });
 
-app.configure('development', function(){
-  app.set("configFile", "config_development.json");
+app.configure('development', function() {
+  nconf.env().file({ file: "config_development.json" });
   app.use(express.errorHandler());
   app.locals.pretty = true;
 });
-
-
-// Initialize nconf.
-nconf.env().file({ file: app.get("configFile") });
-app.set('mapsKey', nconf.get("BING_MAPS_API"));
 
 // Attach all the routes.
 routes.attach(app);
 
 // Start the server.
 http.createServer(app).listen(app.get('port'), function() {
-  console.log("Express server listening on port " + app.get('port'));
+  console.log("Node server listening on port " + app.get('port'));
 });
