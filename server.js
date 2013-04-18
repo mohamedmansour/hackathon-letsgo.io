@@ -8,34 +8,8 @@ var express = require('express')
   , path = require('path')
   , nconf = require('nconf')
   , passport = require('passport')
-  , geoip = require('geoip-lite')
-  , routes = require('./routes'); 
-
-function getCoordinates(req) {
-  var ret,
-      geo,
-      ip = req.ip,
-      portIndex = ip.indexOf(":");
-  
-  if (portIndex != -1) {
-    ip = ip.substring(0, portIndex);
-  }
-  
-  geo = geoip.lookup(ip);
-
-  if (!geo) {
-    ret = { city: "San Francisco", ll: [37.47,-122.13], ip: ip };
-  }
-  else {
-    ret = { city: geo.city, ll: geo.ll, ip: ip };
-  }
-  return JSON.stringify(ret);
-}
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/');
-}
+  , routes = require('./routes')
+  , geolocation = require('./models/geolocation.js'); 
 
 app.configure(function() {
   app.set("trust proxy", true); // Azure runs behind a proxy
@@ -53,7 +27,7 @@ app.configure(function() {
 
   app.use(function (req, res, next) {
     res.locals.user = req.user;
-    res.locals.location = getCoordinates(req);
+    res.locals.location = geolocation.getCoordinates(req);
     res.locals.mapsKey = nconf.get("BING_MAPS_API");
     next();
   });
