@@ -16,29 +16,29 @@ module.exports = function(grunt) {
       },
       js: {
         src: [ '<%= source_path %>/javascripts/*.js' ],
-	dest: [ '<%= build_path %>/javascripts/letsgo.io.js' ]
+        dest: [ '<%= build_path %>/javascripts/letsgo.io.js' ]
       },
       css: {
         src: [ '<%= source_path %>/stylesheets/*.css' ],
-	dest: [ '<%= build_path %>/stylesheets/letsgo.io.css' ]
+        dest: [ '<%= build_path %>/stylesheets/letsgo.io.css' ]
       }
     },
-  
+
     uglify: {
       options: {
         mangle: true,
-	banner: '/*! <%= pkg.title || pkg.name %> */'
+        banner: '/*! <%= pkg.title || pkg.name %> */'
       },
       js: {
         src: '<%= concat.js.dest %>',
-	dest: '<%= build_path %>/javascripts/letsgo.io.min.js'
+        dest: '<%= build_path %>/javascripts/letsgo.io.min.js'
       }
     },
 
     cssmin: {
       css: {
         src: '<%= concat.css.dest %>',
-	dest: '<%= build_path %>/stylesheets/letsgo.io.min.css'
+        dest: '<%= build_path %>/stylesheets/letsgo.io.min.css'
       }
     }
   })
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-       
+
   grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
 
 };
