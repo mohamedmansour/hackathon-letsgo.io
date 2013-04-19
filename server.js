@@ -29,6 +29,7 @@ app.configure(function() {
     res.locals.user = req.user;
     res.locals.location = geolocation.getCoordinates(req);
     res.locals.mapsKey = nconf.get("BING_MAPS_API");
+    res.locals.env = process.env.NODE_ENV || 'development';
     next();
   });
 

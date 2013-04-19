@@ -402,8 +402,23 @@ table {
 
 /* ======== END NORMALIZE ======== */
 
+.staging, .development {
+  color: #fff;
+  padding: 2px 5px;
+  margin: 0 5px;
+}
 
+.staging {
+  background-color: #8B0000;
+}
 
+.development {
+  background-color: #00BFFF;
+}
+
+.production {
+  display: none;
+}
 
 body {
   padding: 0px;
