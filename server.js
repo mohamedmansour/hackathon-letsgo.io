@@ -42,6 +42,10 @@ app.configure('production', function() {
   nconf.env().file({ file: "config.json" });
 });
 
+app.configure('staging', function() {
+  nconf.env();
+});
+
 app.configure('development', function() {
   nconf.env().file({ file: "config_development.json" });
   app.use(express.errorHandler());
