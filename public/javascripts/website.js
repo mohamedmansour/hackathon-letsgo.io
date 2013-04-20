@@ -97,7 +97,7 @@ function getUrl() {
 	
 	$.each(urlState, function(parameter, value) {
 		if (value && value.toString().length > 0) {
-			parameterArray.push(parameter + "=" + encodeURIComponent(value)); // encodeURIComponent converts an array from [1,2,3] to "1,2,3" then encodes the commas.
+			parameterArray.push(parameter + "=" + encodeURIComponent(roundCoordinatesIfNumeric(value))); // encodeURIComponent converts an array from [1,2,3] to "1,2,3" then encodes the commas.
 		}
 	});
 	
@@ -107,6 +107,22 @@ function getUrl() {
 	link = link.split('%2C').join(',');
 	
 	return link;
+}
+
+// Rounds numeric values, eg: (-123.1234567, "123.456"), and arrays of numeric values to 5 digits beyond the decimal point. If not numeric, returns the original value.
+function roundCoordinatesIfNumeric(value) {
+	"use strict";
+	
+	var valueNumeric, returnArray;
+	
+	// Recursively handle arrays
+	if (Array.isArray(value)) { returnArray = []; $.each(value,function(i,v) { returnArray.push(roundCoordinatesIfNumeric(v)); }); return returnArray; };
+	
+	valueNumeric = parseFloat(value);
+	if (!isNaN(valueNumeric) && isFinite(valueNumeric)) { // Check if numeric
+		return Math.round(valueNumeric*100000)/100000;
+	}
+	else return value; // Return original value if numeric.
 }
 
 function getTitle() {
@@ -130,7 +146,6 @@ function replaceWindowHistory() {
 	
 	window.history.replaceState(null, getTitle(), getUrl());
 }
-
 
 // Responsive Logo for the home screen splash.
 function logoSize() {
